@@ -1,0 +1,287 @@
+<div class="page-layout carded fullwidth inner-scroll" id="product">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button [routerLink]="'/apps/e-commerce/products'" class="mr-0 mr-sm-16" mat-icon-button>
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" class="product-image mr-8 mr-sm-16">
+                    <img *ngIf="product.images[0]" [src]="product.images[0].url">
+                    <img *ngIf="!product.images[0]" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                </div>
+
+                <div [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" fxLayout="column"
+                     fxLayoutAlign="start start">
+                    <div *ngIf="pageType ==='edit'" class="h2">
+                        {{product.name}}
+                    </div>
+                    <div *ngIf="pageType ==='new'" class="h2">
+                        New Product
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>Product Detail</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button (click)="addProduct()"
+                    *ngIf="pageType ==='new'"
+                    [disabled]="productForm.invalid"
+                    class="save-product-button" mat-raised-button>
+                <span>ADD</span>
+            </button>
+
+            <button (click)="saveProduct()"
+                    *ngIf="pageType ==='edit'"
+                    [disabled]="productForm.invalid || productForm.pristine"
+                    class="save-product-button" mat-raised-button>
+                <span>SAVE</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <form [formGroup]="productForm" class="product w-100-p" fxFlex fxLayout="column" name="productForm">
+
+                    <mat-tab-group>
+
+                        <mat-tab label="Basic Info">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Product Name</mat-label>
+                                    <input formControlName="name" matInput
+                                           name="name"
+                                           placeholder="Product Name"
+                                           required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Product Description</mat-label>
+                                    <textarea formControlName="description" matInput
+                                              name="description"
+                                              placeholder="Product Description"
+                                              rows="5">
+                                    </textarea>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+
+                                    <mat-label>Categories</mat-label>
+
+                                    <mat-chip-list #categoryList formControlName="categories" name="categories">
+
+                                        <mat-chip (removed)="product.removeCategory(category)"
+                                                  *ngFor="let category of product.categories" [removable]="true">
+                                            {{category}}
+                                            <mat-icon matChipRemove>cancel</mat-icon>
+                                        </mat-chip>
+
+                                        <input (matChipInputTokenEnd)="product.addCategory($event)"
+                                               [matChipInputAddOnBlur]="true"
+                                               [matChipInputFor]="categoryList"/>
+
+                                    </mat-chip-list>
+
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+
+                                    <mat-label>Tags</mat-label>
+
+                                    <mat-chip-list #tagList formControlName="tags" name="tags">
+
+                                        <mat-chip (removed)="product.removeTag(tag)"
+                                                  *ngFor="let tag of product.tags" [removable]="true">
+                                            {{tag}}
+                                            <mat-icon matChipRemove>cancel</mat-icon>
+                                        </mat-chip>
+
+                                        <input (matChipInputTokenEnd)="product.addTag($event)"
+                                               [matChipInputAddOnBlur]="true"
+                                               [matChipInputFor]="tagList"/>
+
+                                    </mat-chip-list>
+
+                                </mat-form-field>
+
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Product Images">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <div fxLayout="row wrap" fxLayoutAlign="start start">
+
+                                    <div *ngIf="product.images.length === 0"
+                                         class="product-image" fxLayoutAlign="center center" fxlayout="row">
+                                        <img [src]="'assets/images/ecommerce/product-image-placeholder.png'"
+                                             class="media">
+                                    </div>
+
+                                    <div *ngFor="let image of product.images">
+                                        <div *ngIf="product.images.length > 0"
+                                             class="product-image" fxLayoutAlign="center center" fxlayout="row">
+                                            <img [src]="image.url" class="media">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Pricing">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Tax Excluded Price</mat-label>
+                                    <input formControlName="priceTaxExcl" matInput
+                                           name="priceTaxExcl"
+                                           placeholder="Tax Excluded Price"
+                                           type="number">
+                                    <span matPrefix>$&nbsp;</span>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Tax Included Price</mat-label>
+                                    <input formControlName="priceTaxIncl" matInput
+                                           name="priceTaxIncl"
+                                           placeholder="Tax Included Price"
+                                           type="number">
+                                    <span matPrefix>$&nbsp;</span>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Tax Rate</mat-label>
+                                    <input formControlName="taxRate" matInput
+                                           name="taxRate"
+                                           placeholder="Tax Rate"
+                                           type="number">
+                                    <span matPrefix>&#37;&nbsp;</span>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Compared Price</mat-label>
+                                    <input formControlName="comparedPrice" matInput
+                                           name="comparedPrice"
+                                           placeholder="Compared Price"
+                                           type="number">
+                                    <span matPrefix>$&nbsp;</span>
+                                    <mat-hint align="start">Add a compare price to show next to the real price
+                                    </mat-hint>
+                                </mat-form-field>
+
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Inventory">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>SKU</mat-label>
+                                    <input formControlName="sku" matInput
+                                           name="sku"
+                                           placeholder="SKU">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Quantity</mat-label>
+                                    <input formControlName="quantity" matInput
+                                           name="quantity"
+                                           placeholder="Quantity"
+                                           type="number">
+                                </mat-form-field>
+
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Shipping">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>Width</mat-label>
+                                        <input formControlName="width" matInput
+                                               name="Width"
+                                               placeholder="Width">
+                                        <span matSuffix>cm</span>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>Height</mat-label>
+                                        <input formControlName="height" matInput
+                                               name="Height"
+                                               placeholder="Height">
+                                        <span matSuffix>cm</span>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>Depth</mat-label>
+                                        <input formControlName="depth" matInput
+                                               name="Depth"
+                                               placeholder="Depth">
+                                        <span matSuffix>cm</span>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Weight</mat-label>
+                                    <input formControlName="weight" matInput
+                                           name="Weight"
+                                           placeholder="Weight">
+                                    <span matSuffix>kg</span>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Extra Shipping Fee</mat-label>
+                                    <input formControlName="extraShippingFee" matInput
+                                           name="extraShippingFee"
+                                           placeholder="Extra Shipping Fee"
+                                           type="number">
+                                    <span matPrefix>$&nbsp;</span>
+                                </mat-form-field>
+
+                            </div>
+
+                        </mat-tab>
+
+                    </mat-tab-group>
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

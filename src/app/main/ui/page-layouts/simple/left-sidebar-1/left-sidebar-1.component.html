@@ -1,0 +1,40 @@
+<div class="page-layout simple left-sidebar">
+
+    <!-- SIDEBAR -->
+    <fuse-sidebar class="sidebar" lockedOpen="gt-md" name="simple-left-sidebar-1" position="left">
+
+        <!-- SIDEBAR CONTENT -->
+        <div class="content p-24">
+            <fuse-demo-sidebar></fuse-demo-sidebar>
+        </div>
+        <!-- / SIDEBAR CONTENT -->
+
+    </fuse-sidebar>
+    <!-- / SIDEBAR -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+
+            <button (click)="toggleSidebar('simple-left-sidebar-1')" class="sidebar-toggle mr-8" fxHide.gt-md
+                    mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <h2 class="m-0">Left sidebar with content scroll</h2>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content p-24">
+            <fuse-demo-content></fuse-demo-content>
+        </div>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

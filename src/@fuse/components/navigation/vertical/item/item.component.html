@@ -1,0 +1,48 @@
+<ng-container *ngIf="!item.hidden">
+
+    <!-- item.url -->
+    <a *ngIf="item.url && !item.externalUrl && !item.function" [ngClass]="item.classes" [routerLinkActiveOptions]="{exact: item.exactMatch || false}"
+       [routerLinkActive]="['active', 'accent']" [routerLink]="[item.url]"
+       [target]="item.openInNewTab ? '_blank' : '_self'"
+       class="nav-link">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <!-- item.externalUrl -->
+    <a *ngIf="item.url && item.externalUrl && !item.function" [href]="item.url" [ngClass]="item.classes"
+       [target]="item.openInNewTab ? '_blank' : '_self'" class="nav-link">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <!-- item.function -->
+    <span (click)="item.function()" *ngIf="!item.url && item.function" [ngClass]="item.classes"
+          class="nav-link">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </span>
+
+    <!-- item.url && item.function -->
+    <a (click)="item.function()" *ngIf="item.url && !item.externalUrl && item.function" [ngClass]="item.classes"
+       [routerLinkActiveOptions]="{exact: item.exactMatch || false}"
+       [routerLinkActive]="['active', 'accent']" [routerLink]="[item.url]"
+       [target]="item.openInNewTab ? '_blank' : '_self'"
+       class="nav-link">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <!-- item.externalUrl && item.function -->
+    <a (click)="item.function()" *ngIf="item.url && item.externalUrl && item.function" [href]="item.url"
+       [ngClass]="item.classes"
+       [target]="item.openInNewTab ? '_blank' : '_self'" class="nav-link">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <ng-template #itemContent>
+        <mat-icon *ngIf="item.icon" class="nav-link-icon">{{item.icon}}</mat-icon>
+        <span [translate]="item.translate" class="nav-link-title">{{item.title}}</span>
+        <span *ngIf="item.badge" [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}" [translate]="item.badge.translate"
+              class="nav-link-badge">
+            {{item.badge.title}}
+        </span>
+    </ng-template>
+
+</ng-container>
