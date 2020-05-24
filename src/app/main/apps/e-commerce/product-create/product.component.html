@@ -81,7 +81,7 @@
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Categories</mat-label>
-                                    <mat-chip-list #categoryList formControlName="categories">
+                                    <mat-chip-list #categoryList>
                                         <mat-chip
                                             (removed)="removeCat(category)"
                                             *ngFor="let category of selectedCategories"
@@ -91,7 +91,7 @@
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #categoryInput
+                                            #categoryInput formControlName="categories"
                                             (matChipInputTokenEnd)="addCat($event)"
                                             [matAutocomplete]="autoCategory"
                                             [matChipInputFor]="categoryList"
@@ -108,7 +108,7 @@
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Tags</mat-label>
-                                    <mat-chip-list #tagList formControlName="tags">
+                                    <mat-chip-list #tagList>
                                         <mat-chip
                                             (removed)="removeTag(tag)"
                                             *ngFor="let tag of selectedTags"
@@ -118,7 +118,7 @@
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #tagInput
+                                            #tagInput formControlName="tags"
                                             (matChipInputTokenEnd)="addTag($event)"
                                             [matAutocomplete]="autoTag"
                                             [matChipInputFor]="tagList"
