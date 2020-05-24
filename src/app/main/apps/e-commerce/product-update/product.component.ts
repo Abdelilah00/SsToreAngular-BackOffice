@@ -8,8 +8,8 @@ import {takeUntil} from 'rxjs/operators';
 import {fuseAnimations} from '@fuse/animations';
 import {FuseUtils} from '@fuse/utils';
 
-import {Product} from 'app/main/apps/e-commerce/product/product.model';
-import {EcommerceProductService} from 'app/main/apps/e-commerce/product/product.service';
+import {Product} from 'app/main/apps/e-commerce/product-create/product.model';
+import {EcommerceProductService} from 'app/main/apps/e-commerce/product-create/product.service';
 
 @Component({
     selector: 'e-commerce-product',

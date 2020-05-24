@@ -19,14 +19,15 @@ import {AgmCoreModule} from '@agm/core';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {FuseWidgetModule} from '@fuse/components/widget/widget.module';
 
-import {EcommerceProductsComponent} from 'app/main/apps/e-commerce/products/products.component';
-import {EcommerceProductsService} from 'app/main/apps/e-commerce/products/products.service';
-import {EcommerceProductComponent} from 'app/main/apps/e-commerce/product/product.component';
-import {EcommerceProductService} from 'app/main/apps/e-commerce/product/product.service';
-import {EcommerceOrdersComponent} from 'app/main/apps/e-commerce/orders/orders.component';
-import {EcommerceOrdersService} from 'app/main/apps/e-commerce/orders/orders.service';
+import {EcommerceProductsComponent} from 'app/main/apps/e-commerce/product-list/products.component';
+import {EcommerceProductsService} from 'app/main/apps/e-commerce/product-list/products.service';
+import {ProductCreateComponent} from 'app/main/apps/e-commerce/product-create/product.component';
+import {EcommerceProductService} from 'app/main/apps/e-commerce/product-create/product.service';
+import {EcommerceOrdersComponent} from 'app/main/apps/e-commerce/order-list/orders.component';
+import {EcommerceOrdersService} from 'app/main/apps/e-commerce/order-list/orders.service';
 import {EcommerceOrderComponent} from 'app/main/apps/e-commerce/order/order.component';
 import {EcommerceOrderService} from 'app/main/apps/e-commerce/order/order.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const routes: Routes = [
     {
@@ -38,14 +39,14 @@ const routes: Routes = [
     },
     {
         path: 'products/:id',
-        component: EcommerceProductComponent,
+        component: ProductCreateComponent,
         resolve: {
             data: EcommerceProductService
         }
     },
     {
         path: 'products/:id/:handle',
-        component: EcommerceProductComponent,
+        component: ProductCreateComponent,
         resolve: {
             data: EcommerceProductService
         }
@@ -69,7 +70,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         EcommerceProductsComponent,
-        EcommerceProductComponent,
+        ProductCreateComponent,
         EcommerceOrdersComponent,
         EcommerceOrderComponent
     ],
@@ -96,7 +97,8 @@ const routes: Routes = [
         }),
 
         FuseSharedModule,
-        FuseWidgetModule
+        FuseWidgetModule,
+        MatAutocompleteModule
     ],
     providers: [
         EcommerceProductsService,
