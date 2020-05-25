@@ -60,15 +60,6 @@ export class ProductCreateComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _location: Location,
         private _matSnackBar: MatSnackBar) {
-
-
-        /*  this.filtredCategories = this.formGroup.controls['categories'].valueChanges.pipe(
-              startWith(null),
-              map((cat: string | null) => cat ? this._filterCategory(cat) : this.allCategories.slice()));*/
-
-        /*   this.filtredTags = this.formGroup.controls['tags'].valueChanges.pipe(
-               startWith(null),
-               map((tag: string | null) => tag ? this._filterTag(tag) : this.allTags.slice()));*/
     }
 
     /*** categories multiSelect with filter*/
@@ -87,7 +78,6 @@ export class ProductCreateComponent implements OnInit {
         }
 
         this.formGroup.controls['categories'].setValue(null);
-        console.log('add');
     }
 
     removeCat(cat: string): void {
@@ -96,14 +86,12 @@ export class ProductCreateComponent implements OnInit {
         if (index >= 0) {
             this.selectedCategories.splice(index, 1);
         }
-        console.log('remove');
     }
 
     selectedCat(event: MatAutocompleteSelectedEvent): void {
         this.selectedCategories.push(event.option.viewValue);
         this.categoryInput.nativeElement.value = '';
         this.formGroup.controls['categories'].setValue(null);
-        console.log('selected');
     }
 
     /*** tags multiSelect with filter*/
