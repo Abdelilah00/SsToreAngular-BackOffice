@@ -6,6 +6,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {FuseDirectivesModule} from '@fuse/directives/directives';
 import {FusePipesModule} from '@fuse/pipes/pipes.module';
+import {MatFileUploadModule} from 'angular-material-fileupload';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {FusePipesModule} from '@fuse/pipes/pipes.module';
         FlexLayoutModule,
 
         FuseDirectivesModule,
-        FusePipesModule
+        FusePipesModule,
+        MatFileUploadModule,
     ]
 })
 export class FuseSharedModule {

@@ -98,7 +98,7 @@ const routes: Routes = [
 
         FuseSharedModule,
         FuseWidgetModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
     ],
     providers: [
         EcommerceProductsService,

@@ -33,15 +33,8 @@
             </div>
             <!-- / APP TITLE -->
 
-            <!--            <button (click)="addProduct()"
-                                *ngIf="pageType ==='new'"
-                                [disabled]="formGroup.invalid"
-                                class="save-product-button" mat-raised-button>
-                            <span>ADD</span>
-                        </button>-->
-
             <button (click)="saveProduct()"
-                    [disabled]="formGroup.invalid || formGroup.pristine"
+                    [disabled]="formGroup.invalid"
                     class="save-product-button" mat-raised-button>
                 <span>SAVE</span>
             </button>
@@ -67,7 +60,7 @@
                                     <input formControlName="name" matInput
                                            name="name"
                                            placeholder="Product Name"
-                                           required>
+                                    >
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
@@ -91,7 +84,7 @@
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #categoryInput formControlName="categories"
+                                            #categoryInput formControlName="categoriesName"
                                             (matChipInputTokenEnd)="addCat($event)"
                                             [matAutocomplete]="autoCategory"
                                             [matChipInputFor]="categoryList"
@@ -105,9 +98,9 @@
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
-
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Tags</mat-label>
+
                                     <mat-chip-list #tagList>
                                         <mat-chip
                                             (removed)="removeTag(tag)"
@@ -118,19 +111,19 @@
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #tagInput formControlName="tags"
+                                            #tagInput formControlName="tagsName"
                                             (matChipInputTokenEnd)="addTag($event)"
                                             [matAutocomplete]="autoTag"
                                             [matChipInputFor]="tagList"
                                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
                                     </mat-chip-list>
+
                                     <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
                                         <mat-option *ngFor="let tag of filtredTags | async" [value]="tag">
                                             {{tag}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
-
 
                             </div>
 
@@ -140,6 +133,7 @@
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div fxLayout="row wrap" fxLayoutAlign="start start">
+                                    <input formControlName="images" name="images" type="file">
                                 </div>
                             </div>
 
@@ -150,67 +144,25 @@
                             <div class="tab-content p-24" fusePerfectScrollbar>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Tax Excluded Price</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="priceTaxExcl"
-                                           placeholder="Tax Excluded Price"
+                                    <mat-label>Price</mat-label>
+                                    <input formControlName="price" matInput
+                                           name="price"
+                                           placeholder="Price"
                                            type="number">
                                     <span matPrefix>$&nbsp;</span>
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Tax Included Price</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="priceTaxIncl"
-                                           placeholder="Tax Included Price"
+                                    <mat-label>qte</mat-label>
+                                    <input formControlName="qte" matInput
+                                           name="qte"
+                                           placeholder="Qte"
                                            type="number">
                                     <span matPrefix>$&nbsp;</span>
                                 </mat-form-field>
 
-                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Tax Rate</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="taxRate"
-                                           placeholder="Tax Rate"
-                                           type="number">
-                                    <span matPrefix>&#37;&nbsp;</span>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Compared Price</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="comparedPrice"
-                                           placeholder="Compared Price"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
-                                    <mat-hint align="start">Add a compare price to show next to the real price
-                                    </mat-hint>
-                                </mat-form-field>
 
                             </div>
-                        </mat-tab>
-
-                        <mat-tab label="Inventory">
-
-                            <div class="tab-content p-24" fusePerfectScrollbar>
-
-                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>SKU</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="sku"
-                                           placeholder="SKU">
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Quantity</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="quantity"
-                                           placeholder="Quantity"
-                                           type="number">
-                                </mat-form-field>
-
-                            </div>
-
                         </mat-tab>
 
                         <mat-tab label="Shipping">
@@ -218,48 +170,65 @@
                             <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
 
                                 <div fxLayout="row" fxLayoutAlign="space-between">
-
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Width</mat-label>
-                                        <input formControlName="name" matInput
-                                               name="Width"
-                                               placeholder="Width">
-                                        <span matSuffix>cm</span>
+                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
+                                                    fxFlex="30">
+                                        <mat-label>Product overviewDiscription</mat-label>
+                                        <textarea formControlName="overviewDiscription" matInput
+                                                  name="overviewDiscription"
+                                                  placeholder="overview Discription"
+                                                  rows="5">
+                                    </textarea>
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Height</mat-label>
-                                        <input formControlName="name" matInput
-                                               name="Height"
-                                               placeholder="Height">
-                                        <span matSuffix>cm</span>
+                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
+                                                    fxFlex="30">
+                                        <mat-label>Product specifications</mat-label>
+                                        <textarea formControlName="specifications" matInput
+                                                  name="specifications"
+                                                  placeholder="specifications"
+                                                  rows="5">
+                                    </textarea>
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Depth</mat-label>
-                                        <input formControlName="name" matInput
-                                               name="Depth"
-                                               placeholder="Depth">
-                                        <span matSuffix>cm</span>
+                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
+                                                    fxFlex="30">
+                                        <mat-label>Product characteristic</mat-label>
+                                        <textarea formControlName="characteristic" matInput
+                                                  name="characteristic"
+                                                  placeholder="characteristic"
+                                                  rows="5">
+                                    </textarea>
                                     </mat-form-field>
+
 
                                 </div>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Weight</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="Weight"
-                                           placeholder="Weight">
-                                    <span matSuffix>kg</span>
-                                </mat-form-field>
+                                    <mat-label>Ware House</mat-label>
 
-                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Extra Shipping Fee</mat-label>
-                                    <input formControlName="name" matInput
-                                           name="extraShippingFee"
-                                           placeholder="Extra Shipping Fee"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
+                                    <mat-chip-list #wareHouseList>
+                                        <mat-chip
+                                            (removed)="removeWareHouse(wareHouse)"
+                                            *ngFor="let wareHouse of selectedWareHouses"
+                                            [removable]="removable"
+                                            [selectable]="selectable">
+                                            {{wareHouse}}
+                                            <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+                                        </mat-chip>
+                                        <input
+                                            #wareHouseInput (matChipInputTokenEnd)="addTag($event)"
+                                            [matAutocomplete]="autoWareHouse"
+                                            [matChipInputFor]="wareHouseList"
+                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                            formControlName="tagsName">
+                                    </mat-chip-list>
+
+                                    <mat-autocomplete #autoWareHouse="matAutocomplete"
+                                                      (optionSelected)="selectedWareHouse($event)">
+                                        <mat-option *ngFor="let wHouse of filtredWareHouses | async" [value]="wHouse">
+                                            {{wHouse}}
+                                        </mat-option>
+                                    </mat-autocomplete>
                                 </mat-form-field>
 
                             </div>

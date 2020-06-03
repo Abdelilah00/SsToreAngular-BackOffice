@@ -21,6 +21,7 @@ import {AppComponent} from 'app/app.component';
 import {AppStoreModule} from 'app/store/store.module';
 import {LayoutModule} from 'app/layout/layout.module';
 
+
 const appRoutes: Routes = [
     {
         path: 'apps',
@@ -49,7 +50,6 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
-
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay: 0,
@@ -72,7 +72,8 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        AppStoreModule
+        AppStoreModule,
+
     ],
     bootstrap: [
         AppComponent
