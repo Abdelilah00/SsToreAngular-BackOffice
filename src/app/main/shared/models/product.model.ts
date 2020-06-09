@@ -1,18 +1,18 @@
 import {BaseModel} from './base-model.model';
 
-class SpecificationDto {
+class Specification {
     name: string;
     value: string;
 }
 
 
-class CharacteristicDto {
+class Characteristic {
     name: string;
     values: Array<string>;
 }
 
 
-class ProductReviewsDto {
+class ProductReviews {
     stars: number;
     review: string;
     helpful: boolean;
@@ -22,17 +22,17 @@ export class Product extends BaseModel {
 
 
     name: string;
-    description: string;
+    comment: string;
     price: number;
     qte: number;
 
     images: FileList;
-    overviewDiscription: string;
-    specifications: SpecificationDto[];
+    overview: string;
+    specifications: Specification[];
 
 
-    tagsName: string[];
-    categoriesName: number;
-    characteristic: CharacteristicDto[];
-    wareHouse: string[];
+    tagsId: number[];
+    categoriesId: number[];
+    characteristics: Characteristic[];
+    wareHousesId: number[];
 }

@@ -11,8 +11,10 @@ import {CategoryService} from '../../../shared/services/category/category.servic
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
 import {WareHouseService} from '../../../shared/services/ware-house/ware-house.service';
+import {Category} from '../../../shared/models/category.model';
+import {Tag} from '../../../shared/models/tag.model';
+import {WareHouse} from '../../../shared/models/ware-house.model';
 
 @Component({
     selector: 'e-commerce-product',
@@ -38,17 +40,17 @@ export class ProductCreateComponent implements OnInit {
     saving = false;
     formGroup = this.createProductFormGroup();
 
-    filtredCategories: Observable<string[]>;
-    selectedCategories = new Array<string>();
-    allCategories = new Array<string>();
+    filtredCategories: Observable<Category[]>;
+    selectedCategories = new Array<Category>();
+    allCategories = new Array<Category>();
 
-    filtredTags: Observable<string[]>;
-    selectedTags = new Array<string>();
-    allTags = new Array<string>();
+    filtredTags: Observable<Tag[]>;
+    selectedTags = new Array<Tag>();
+    allTags = new Array<Tag>();
 
-    filtredWareHouses: Observable<string[]>;
-    selectedWareHouses = new Array<string>();
-    allWareHouses = new Array<string>();
+    filtredWareHouses: Observable<WareHouse[]>;
+    selectedWareHouses = new Array<WareHouse>();
+    allWareHouses = new Array<WareHouse>();
 
     /**
      * Constructor
@@ -71,96 +73,65 @@ export class ProductCreateComponent implements OnInit {
         private _matSnackBar: MatSnackBar) {
     }
 
-    /*** categories multiSelect with filter*/
-    addCat(event: MatChipInputEvent): void {
-        const input = event.input;
-        const value = event.value;
-
-        // Add our Cat
-        if ((value || '').trim()) {
-            this.selectedCategories.push(value.trim());
+    findWithAttr(array, attr, value): number {
+        for (let i = 0; i < array.length; i += 1) {
+            if (array[i][attr] === value) {
+                return i;
+            }
         }
-
-        // Reset the input value
-        if (input) {
-            input.value = '';
-        }
-
-        this.formGroup.controls['categoriesName'].setValue(null);
+        return -1;
     }
-    removeCat(cat: string): void {
-        const index = this.selectedCategories.indexOf(cat);
 
+    /*** categories multiSelect with filter*/
+    removeCat(cat: string): void {
+        const index = this.findWithAttr(this.selectedCategories, 'name', cat);
         if (index >= 0) {
             this.selectedCategories.splice(index, 1);
         }
     }
+
     selectedCat(event: MatAutocompleteSelectedEvent): void {
-        this.selectedCategories.push(event.option.viewValue);
+        const category = new Category();
+        category.id = event.option.value;
+        category.name = event.option.viewValue;
+        this.selectedCategories.push(category);
         this.categoryInput.nativeElement.value = '';
-        this.formGroup.controls['categoriesName'].setValue(null);
+        this.formGroup.controls['categoriesId'].setValue(null);
     }
 
     /*** tags multiSelect with filter*/
-    addTag(event: MatChipInputEvent): void {
-        const input = event.input;
-        const value = event.value;
-
-        // Add our Cat
-        if ((value || '').trim()) {
-            this.selectedTags.push(value.trim());
-        }
-
-        // Reset the input value
-        if (input) {
-            input.value = '';
-        }
-
-        this.formGroup.controls['tagsName'].setValue(null);
-    }
-    removeTag(cat: string): void {
-        const index = this.selectedTags.indexOf(cat);
+    removeTag(tag: string): void {
+        const index = this.findWithAttr(this.selectedTags, 'name', tag);
 
         if (index >= 0) {
             this.selectedTags.splice(index, 1);
         }
     }
+
     selectedTag(event: MatAutocompleteSelectedEvent): void {
-        this.selectedTags.push(event.option.viewValue);
+        const tag = new Tag();
+        tag.id = event.option.value;
+        tag.name = event.option.viewValue;
+        this.selectedTags.push(tag);
         this.tagInput.nativeElement.value = '';
-        this.formGroup.controls['tagsName'].setValue(null);
+        this.formGroup.controls['tagsId'].setValue(null);
     }
 
     /*** WareHouse multiSelect with filter*/
-    addWareHouse(event: MatChipInputEvent): void {
-        const input = event.input;
-        const value = event.value;
-
-        // Add our Cat
-        if ((value || '').trim()) {
-            this.selectedWareHouses.push(value.trim());
-        }
-
-        // Reset the input value
-        if (input) {
-            input.value = '';
-        }
-
-        this.formGroup.controls['wareHouseCountry'].setValue(null);
-    }
-
-    removeWareHouse(cat: string): void {
-        const index = this.selectedWareHouses.indexOf(cat);
-
+    removeWareHouse(wHouse: string): void {
+        const index = this.findWithAttr(this.selectedWareHouses, 'country', wHouse);
         if (index >= 0) {
             this.selectedWareHouses.splice(index, 1);
         }
     }
 
     selectedWareHouse(event: MatAutocompleteSelectedEvent): void {
-        this.selectedWareHouses.push(event.option.viewValue);
+        const wHouse = new WareHouse();
+        wHouse.id = event.option.value;
+        wHouse.country = event.option.viewValue;
+        this.selectedWareHouses.push(wHouse);
         this.tagInput.nativeElement.value = '';
-        this.formGroup.controls['wareHouseCountry'].setValue(null);
+        this.formGroup.controls['wareHousesId'].setValue(null);
     }
 
     /**
@@ -169,22 +140,22 @@ export class ProductCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this._categoryService.getAll().subscribe(data => {
-            this.allCategories = data.map(d => d.name);
-            this.filtredCategories = this.formGroup.controls['categoriesName'].valueChanges.pipe(
+            this.allCategories = data;
+            this.filtredCategories = this.formGroup.controls['categoriesId'].valueChanges.pipe(
                 startWith(null),
                 map((cat: string | null) => cat ? this._filterCategory(cat) : this.allCategories.slice()));
         });
 
         this._tagService.getAll().subscribe(data => {
-            this.allTags = data.map(d => d.name);
-            this.filtredTags = this.formGroup.controls['tagsName'].valueChanges.pipe(
+            this.allTags = data;
+            this.filtredTags = this.formGroup.controls['tagsId'].valueChanges.pipe(
                 startWith(null),
                 map((tag: string | null) => tag ? this._filterTag(tag) : this.allTags.slice()));
         });
 
         this._wareHouseService.getAll().subscribe(data => {
-            this.allWareHouses = data.map(d => d.country);
-            this.filtredWareHouses = this.formGroup.controls['wareHouseCountry'].valueChanges.pipe(
+            this.allWareHouses = data;
+            this.filtredWareHouses = this.formGroup.controls['wareHousesId'].valueChanges.pipe(
                 startWith(null),
                 map((wareHouse: string | null) => wareHouse ? this._filterWareHouse(wareHouse) : this.allWareHouses.slice()));
         });
@@ -198,19 +169,19 @@ export class ProductCreateComponent implements OnInit {
     createProductFormGroup(): FormGroup {
         return this._formBuilder.group({
             name: ['', Validators.required],
-            description: ['', Validators.required],
-
-            tagsName: ['', Validators.nullValidator],
-            categoriesName: ['', Validators.nullValidator],
-            images: ['', Validators.nullValidator],
+            comment: ['', Validators.required],
             price: ['', Validators.nullValidator],
             qte: ['', Validators.nullValidator],
+            overview: ['', Validators.nullValidator],
 
-            overviewDiscription: ['', Validators.nullValidator],
+            tagsId: ['', Validators.nullValidator],
+            categoriesId: ['', Validators.nullValidator],
+            wareHousesId: ['', Validators.nullValidator],
+            shippingMethodsId: ['', Validators.nullValidator],
+
+            images: ['', Validators.nullValidator],
             specifications: ['', Validators.nullValidator],
-
-            characteristic: ['', Validators.nullValidator],
-            wareHouseCountry: ['', Validators.nullValidator],
+            characteristics: ['', Validators.nullValidator],
         });
     }
 
@@ -222,13 +193,23 @@ export class ProductCreateComponent implements OnInit {
      * Save product
      */
     saveProduct(): void {
-        this.formGroup.controls['categoriesName'].setValue(this.selectedCategories);
-        this.formGroup.controls['tagsName'].setValue(this.selectedTags);
-        this.formGroup.controls['wareHouseCountry'].setValue(this.selectedWareHouses);
+        this.formGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
+        this.formGroup.controls['tagsId'].setValue(this.selectedTags.map(data => data.id));
+        this.formGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
+
+        // TODO: Add this fields to Form
+        /*this.formGroup.controls['shippingMethodsId'].setValue(new Array([1]));
+        this.formGroup.controls['specifications'].setValue(new Array([{name: 'string', value: 1}]));
+        this.formGroup.controls['characteristics'].setValue(new Array([{name: 'string', values: [1, 2]}]));*/
+
+        const prod = {
+            images: this.formGroup.controls['images'],
+            product: this.formGroup
+        };
 
         this.saving = true;
         this._service
-            .create(this.formGroup.value)
+            .createWithImages(prod)
             .pipe(
                 finalize(() => {
                     this.saving = false;
@@ -258,17 +239,18 @@ export class ProductCreateComponent implements OnInit {
         this._location.back();
     }
 
-    private _filterCategory(value: string): string[] {
+    private _filterCategory(value: string): Category[] {
         const filterValue = value.toString().toLowerCase();
-        return this.allCategories.filter(cat => cat.toLowerCase().indexOf(filterValue) === 0);
-    }
-    private _filterTag(value: string): string[] {
-        const filterValue = value.toString().toLowerCase();
-        return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+        return this.allCategories.filter(cat => cat.name.toLowerCase().indexOf(filterValue) === 0);
     }
 
-    private _filterWareHouse(value: string): string[] {
+    private _filterTag(value: string): Tag[] {
         const filterValue = value.toString().toLowerCase();
-        return this.allWareHouses.filter(wareHouse => wareHouse.toLowerCase().indexOf(filterValue) === 0);
+        return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
+    }
+
+    private _filterWareHouse(value: string): WareHouse[] {
+        const filterValue = value.toString().toLowerCase();
+        return this.allWareHouses.filter(wareHouse => wareHouse.country.toLowerCase().indexOf(filterValue) === 0);
     }
 }

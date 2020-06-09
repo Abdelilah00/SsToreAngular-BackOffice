@@ -47,7 +47,8 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <form [formGroup]="formGroup" class="product w-100-p" fxFlex fxLayout="column" name="formGroup">
+                <form [formGroup]="formGroup" class="product w-100-p" enctype="multipart/form-data" fxFlex
+                      fxLayout="column" name="formGroup">
 
                     <mat-tab-group>
 
@@ -65,8 +66,8 @@
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Product Description</mat-label>
-                                    <textarea formControlName="description" matInput
-                                              name="description"
+                                    <textarea formControlName="comment" matInput
+                                              name="comment"
                                               placeholder="Product Description"
                                               rows="5">
                                     </textarea>
@@ -76,16 +77,15 @@
                                     <mat-label>Categories</mat-label>
                                     <mat-chip-list #categoryList>
                                         <mat-chip
-                                            (removed)="removeCat(category)"
+                                            (removed)="removeCat(category.name)"
                                             *ngFor="let category of selectedCategories"
                                             [removable]="removable"
                                             [selectable]="selectable">
-                                            {{category}}
+                                            {{category.name}}
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #categoryInput formControlName="categoriesName"
-                                            (matChipInputTokenEnd)="addCat($event)"
+                                            #categoryInput formControlName="categoriesId"
                                             [matAutocomplete]="autoCategory"
                                             [matChipInputFor]="categoryList"
                                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
@@ -93,34 +93,34 @@
                                     <mat-autocomplete #autoCategory="matAutocomplete"
                                                       (optionSelected)="selectedCat($event)">
                                         <mat-option *ngFor="let category of filtredCategories | async"
-                                                    [value]="category">
-                                            {{category}}
+                                                    [value]="category.id">
+                                            {{category.name}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
+
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Tags</mat-label>
 
                                     <mat-chip-list #tagList>
                                         <mat-chip
-                                            (removed)="removeTag(tag)"
+                                            (removed)="removeTag(tag.name)"
                                             *ngFor="let tag of selectedTags"
                                             [removable]="removable"
                                             [selectable]="selectable">
-                                            {{tag}}
+                                            {{tag.name}}
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #tagInput formControlName="tagsName"
-                                            (matChipInputTokenEnd)="addTag($event)"
+                                            #tagInput formControlName="tagsId"
                                             [matAutocomplete]="autoTag"
                                             [matChipInputFor]="tagList"
                                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
                                     </mat-chip-list>
 
                                     <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
-                                        <mat-option *ngFor="let tag of filtredTags | async" [value]="tag">
-                                            {{tag}}
+                                        <mat-option *ngFor="let tag of filtredTags | async" [value]="tag.id">
+                                            {{tag.name}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
@@ -133,7 +133,7 @@
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div fxLayout="row wrap" fxLayoutAlign="start start">
-                                    <input formControlName="images" name="images" type="file">
+                                    <input formControlName="images" multiple name="images" type="file">
                                 </div>
                             </div>
 
@@ -172,10 +172,10 @@
                                 <div fxLayout="row" fxLayoutAlign="space-between">
                                     <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
                                                     fxFlex="30">
-                                        <mat-label>Product overviewDiscription</mat-label>
-                                        <textarea formControlName="overviewDiscription" matInput
-                                                  name="overviewDiscription"
-                                                  placeholder="overview Discription"
+                                        <mat-label>Product overview</mat-label>
+                                        <textarea formControlName="overview" matInput
+                                                  name="overview"
+                                                  placeholder="overview"
                                                   rows="5">
                                     </textarea>
                                     </mat-form-field>
@@ -193,9 +193,9 @@
                                     <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
                                                     fxFlex="30">
                                         <mat-label>Product characteristic</mat-label>
-                                        <textarea formControlName="characteristic" matInput
-                                                  name="characteristic"
-                                                  placeholder="characteristic"
+                                        <textarea formControlName="characteristics" matInput
+                                                  name="characteristics"
+                                                  placeholder="characteristics"
                                                   rows="5">
                                     </textarea>
                                     </mat-form-field>
@@ -208,25 +208,26 @@
 
                                     <mat-chip-list #wareHouseList>
                                         <mat-chip
-                                            (removed)="removeWareHouse(wareHouse)"
+                                            (removed)="removeWareHouse(wareHouse.country)"
                                             *ngFor="let wareHouse of selectedWareHouses"
                                             [removable]="removable"
                                             [selectable]="selectable">
-                                            {{wareHouse}}
+                                            {{wareHouse.country}}
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
-                                            #wareHouseInput (matChipInputTokenEnd)="addTag($event)"
+                                            #wareHouseInput
                                             [matAutocomplete]="autoWareHouse"
                                             [matChipInputFor]="wareHouseList"
                                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                            formControlName="tagsName">
+                                            formControlName="wareHousesId">
                                     </mat-chip-list>
 
                                     <mat-autocomplete #autoWareHouse="matAutocomplete"
                                                       (optionSelected)="selectedWareHouse($event)">
-                                        <mat-option *ngFor="let wHouse of filtredWareHouses | async" [value]="wHouse">
-                                            {{wHouse}}
+                                        <mat-option *ngFor="let wHouse of filtredWareHouses | async"
+                                                    [value]="wHouse.id">
+                                            {{wHouse.country}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>

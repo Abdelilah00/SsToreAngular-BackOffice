@@ -53,7 +53,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '2837273da9b93dd84243s0f9',
                     'name': 'Update generators',
-                    'description': 'Current generator doesn\'t support Node.js 6 and above.',
+                    'comment': 'Current generator doesn\'t support Node.js 6 and above.',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '26027s1930450d8bf7b10828'
@@ -79,7 +79,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '5603a2a3cab0c8300f6096b3',
                     'name': 'Change background colors',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '67027cahbe3b52ecf2dc631c',
                     'idMembers': [
                         '76027g1930450d8bf7b10958'
@@ -185,7 +185,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '5637273da9b93bb84743a0f9',
                     'name': 'Fix splash screen bugs',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '56027c1930450d8bf7b10758'
@@ -205,7 +205,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': 'd9005a4b89ed2aadca48a6ad',
                     'name': 'Add alternative authentication pages',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '36027j1930450d8bf7b10158'
@@ -254,7 +254,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '5787b7e4740c57bf0dffd5b6',
                     'name': 'Fix the console',
-                    'description': 'We need to fix the console asap!',
+                    'comment': 'We need to fix the console asap!',
                     'idAttachmentCover': '',
                     'idMembers': [],
                     'idLabels': [
@@ -278,7 +278,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': 'f6b9d7a9247e5d794a081927',
                     'name': 'New media player',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '76027g1930450d8bf7b10958',
@@ -301,7 +301,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': 'acc6.9c673cd2f5e35.521e91d8d5991.4b2a95e0539d1.027930c0743c5.7ad1ea7bea476.e8fbe6347',
                     'name': 'Memory Leak',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '36027j1930450d8bf7b10158'
@@ -322,7 +322,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '3279.3d69b40cc0b75.690252b6bea08.1e1789b0b7c2e.2f264b8661ce2.84d5f56910e23.429be5e8a',
                     'name': 'Broken toolbar on profile page',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '26027s1930450d8bf7b10828'
@@ -348,7 +348,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': 'ba01.8e1a43f92a03a.0022bd5cbb9ba.275c64d911d8c.880e0846a3966.f75ff43e53ad.48ad612e7',
                     'name': 'Button hover style',
-                    'description': 'If there are 3 or more buttons in certain page, weird flashing happens when you hover over the red ones.',
+                    'comment': 'If there are 3 or more buttons in certain page, weird flashing happens when you hover over the red ones.',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '26027s1930450d8bf7b10828'
@@ -369,7 +369,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '80ed.24ad3b18e2668.f28fbbceeeff9.5a834620a42f1.5909be19a2bf2.6c4a54947ce2d.da356b0c1',
                     'name': 'New header designs',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '12027cafbe3b52ecf2ef632c',
                     'idMembers': [],
                     'idLabels': [
@@ -410,7 +410,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '0ad2.7862f947bc456.f42b446df54cb.d1dd9e93601a1.9deb1406d1404.0b3c278fc7001.733341b42',
                     'name': 'Fixed footer',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '26027s1930450d8bf7b10828',
@@ -431,7 +431,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': 'bad3.51be8ad33acaf.9540ecb37f7e8.6bee596cfe7d3.44c68bee289c4.b96ed0b9f0af7.e14846035',
                     'name': 'Collapsable navigation',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '',
                     'idMembers': [],
                     'idLabels': [
@@ -455,7 +455,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '44d1.2b51ea6cc2b5d.21f4a3412e857.8ffa2d8b44ad9.ac87215ed53a1.67d4921ad8f8d.9f318bcb2',
                     'name': 'Mail app new layout',
-                    'description': 'Current layout has lots of flaws in mobile. Outlook view should help with that.',
+                    'comment': 'Current layout has lots of flaws in mobile. Outlook view should help with that.',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '56027c1930450d8bf7b10758',
@@ -479,7 +479,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '7987.9740ba532b0d4.f9d12243f7362.507c0738dc561.87fba0a03df6e.75e6508cacf10.7a9835b54',
                     'name': 'API recover and monitoring',
-                    'description': 'We need a service to monitor and recover failed APIs.',
+                    'comment': 'We need a service to monitor and recover failed APIs.',
                     'idAttachmentCover': '',
                     'idMembers': [
                         '36027j1930450d8bf7b10158',
@@ -612,7 +612,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '5603a2a3cab0c8300f6096b3',
                     'name': 'Calendar App Design',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '56027cfcbe1b72ecf1fc452a',
                     'idMembers': [
                         '56027c1930450d8bf7b10758',
@@ -718,7 +718,7 @@ export class ScrumboardFakeDb {
                 {
                     'id': '5637273da9b93bb84743a0f9',
                     'name': 'Fix Splash Screen bugs',
-                    'description': '',
+                    'comment': '',
                     'idAttachmentCover': '5603a2ae2bbd55bb2db57478',
                     'idMembers': [
                         '56027c1930450d8bf7b10758'

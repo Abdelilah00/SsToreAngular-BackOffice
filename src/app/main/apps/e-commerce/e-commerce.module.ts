@@ -28,6 +28,7 @@ import {EcommerceOrdersService} from 'app/main/apps/e-commerce/order-list/orders
 import {EcommerceOrderComponent} from 'app/main/apps/e-commerce/order/order.component';
 import {EcommerceOrderService} from 'app/main/apps/e-commerce/order/order.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {ProductUpdateComponent} from './product-update/product.component';
 
 const routes: Routes = [
     {
@@ -71,6 +72,7 @@ const routes: Routes = [
     declarations: [
         EcommerceProductsComponent,
         ProductCreateComponent,
+        ProductUpdateComponent,
         EcommerceOrdersComponent,
         EcommerceOrderComponent
     ],
