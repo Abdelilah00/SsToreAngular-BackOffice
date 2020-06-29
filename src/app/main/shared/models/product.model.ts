@@ -26,7 +26,7 @@ export class Product extends BaseModel {
     price: number;
     qte: number;
 
-    images: FileList;
+    images: Blob;
     overview: string;
     specifications: Specification[];
 

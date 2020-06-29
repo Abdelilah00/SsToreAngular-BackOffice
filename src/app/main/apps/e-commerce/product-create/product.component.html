@@ -47,7 +47,7 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <form [formGroup]="formGroup" class="product w-100-p" enctype="multipart/form-data" fxFlex
+                <form [formGroup]="formGroup" class="product w-100-p"  fxFlex
                       fxLayout="column" name="formGroup">
 
                     <mat-tab-group>
@@ -133,7 +133,7 @@
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div fxLayout="row wrap" fxLayoutAlign="start start">
-                                    <input formControlName="images" multiple name="images" type="file">
+                                    <input formControlName="images" multiple name="images" type="file" (onChange)="uploadFile($event)">
                                 </div>
                             </div>
 

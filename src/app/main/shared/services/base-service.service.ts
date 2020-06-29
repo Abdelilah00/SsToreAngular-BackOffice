@@ -16,7 +16,11 @@ export abstract class BaseService<TModel extends BaseModel> {
     protected loading: boolean;
 
     protected httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'})
+        headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    };
+
+    protected httpOptions1 = {
+        headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
     };
 
     constructor(protected httpClient: HttpClient, protected uri: string, private role: string) {

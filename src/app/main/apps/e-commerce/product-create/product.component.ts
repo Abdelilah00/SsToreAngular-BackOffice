@@ -179,7 +179,7 @@ export class ProductCreateComponent implements OnInit {
             wareHousesId: ['', Validators.nullValidator],
             shippingMethodsId: ['', Validators.nullValidator],
 
-            images: ['', Validators.nullValidator],
+            images: [null, Validators.nullValidator],
             specifications: ['', Validators.nullValidator],
             characteristics: ['', Validators.nullValidator],
         });
@@ -192,24 +192,27 @@ export class ProductCreateComponent implements OnInit {
     /**
      * Save product
      */
+    uploadFile(event): void {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.formGroup.get('images').setValue(file);
+        }
+    }
+
     saveProduct(): void {
         this.formGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
         this.formGroup.controls['tagsId'].setValue(this.selectedTags.map(data => data.id));
         this.formGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
 
         // TODO: Add this fields to Form
-        /*this.formGroup.controls['shippingMethodsId'].setValue(new Array([1]));
-        this.formGroup.controls['specifications'].setValue(new Array([{name: 'string', value: 1}]));
-        this.formGroup.controls['characteristics'].setValue(new Array([{name: 'string', values: [1, 2]}]));*/
+        this.formGroup.controls['shippingMethodsId'].setValue([1]);
+        this.formGroup.controls['specifications'].setValue([{name: 'string', value: 1}]);
+        this.formGroup.controls['characteristics'].setValue([{name: 'string', values: [1, 2]}]);
 
-        const prod = {
-            images: this.formGroup.controls['images'],
-            product: this.formGroup
-        };
 
         this.saving = true;
         this._service
-            .createWithImages(prod)
+            .createWithImages(this.formGroup.value)
             .pipe(
                 finalize(() => {
                     this.saving = false;
