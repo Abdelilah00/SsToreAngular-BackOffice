@@ -20,7 +20,8 @@ export abstract class BaseService<TModel extends BaseModel> {
     };
 
     protected httpOptions1 = {
-        headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
+        headers: new HttpHeaders({'Content-Type': 'multipart/form-data'}),
+        reportProgress: true
     };
 
     constructor(protected httpClient: HttpClient, protected uri: string, private role: string) {

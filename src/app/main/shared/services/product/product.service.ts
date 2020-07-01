@@ -4,8 +4,6 @@ import {Product} from '../../models/product.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {retry} from 'rxjs/operators';
-import {FormGroup} from '@angular/forms';
-import {stringify} from 'querystring';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +13,11 @@ export class ProductService extends BaseService<Product> {
         super(httpClient, 'products', 'admin');
     }
 
-    createWithImages(input: Product): Observable<Product> {
-        return this.httpClient.post<Product>(this.baseUrl + '/createWithImages', JSON.stringify(input), this.httpOptions)
+    createWithImages(input): Observable<Product> {
+
+        console.log(input);
+
+        return this.httpClient.post<Product>(this.baseUrl + '/withImages', input)
             .pipe(retry(1));
     }
 }

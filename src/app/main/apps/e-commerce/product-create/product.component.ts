@@ -210,9 +210,14 @@ export class ProductCreateComponent implements OnInit {
         this.formGroup.controls['characteristics'].setValue([{name: 'string', values: [1, 2]}]);
 
 
+        const prod = {
+            images: this.formGroup.controls['images'].value,
+            product: this.formGroup.value
+        };
+
         this.saving = true;
         this._service
-            .createWithImages(this.formGroup.value)
+            .createWithImages(prod)
             .pipe(
                 finalize(() => {
                     this.saving = false;
