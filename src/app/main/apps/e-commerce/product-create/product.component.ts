@@ -15,6 +15,7 @@ import {WareHouseService} from '../../../shared/services/ware-house/ware-house.s
 import {Category} from '../../../shared/models/category.model';
 import {Tag} from '../../../shared/models/tag.model';
 import {WareHouse} from '../../../shared/models/ware-house.model';
+import {Product} from '../../../shared/models/product.model';
 
 @Component({
     selector: 'e-commerce-product',
@@ -39,6 +40,7 @@ export class ProductCreateComponent implements OnInit {
 
     saving = false;
     formGroup = this.createProductFormGroup();
+    formData = new FormData();
 
     filtredCategories: Observable<Category[]>;
     selectedCategories = new Array<Category>();
@@ -168,11 +170,11 @@ export class ProductCreateComponent implements OnInit {
      */
     createProductFormGroup(): FormGroup {
         return this._formBuilder.group({
-            name: ['', Validators.required],
-            comment: ['', Validators.required],
-            price: ['', Validators.nullValidator],
-            qte: ['', Validators.nullValidator],
-            overview: ['', Validators.nullValidator],
+            name: ['test', Validators.required],
+            comment: ['test', Validators.required],
+            price: ['10', Validators.nullValidator],
+            qte: ['1000', Validators.nullValidator],
+            overview: ['test', Validators.nullValidator],
 
             tagsId: ['', Validators.nullValidator],
             categoriesId: ['', Validators.nullValidator],
@@ -192,10 +194,13 @@ export class ProductCreateComponent implements OnInit {
     /**
      * Save product
      */
+
     uploadFile(event): void {
         if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            this.formGroup.get('images').setValue(file);
+            // TODO: add multi select  and images previewers
+            const file = event.target.files[0] as File;
+            this.formData.append('images', file, file.name);
+            this.formGroup.controls['images'].setValue(null);
         }
     }
 
@@ -209,15 +214,11 @@ export class ProductCreateComponent implements OnInit {
         this.formGroup.controls['specifications'].setValue([{name: 'string', value: 1}]);
         this.formGroup.controls['characteristics'].setValue([{name: 'string', values: [1, 2]}]);
 
-
-        const prod = {
-            images: this.formGroup.controls['images'].value,
-            product: this.formGroup.value
-        };
+        this.formData.append('product', JSON.stringify(this.formGroup.value as Product));
 
         this.saving = true;
         this._service
-            .createWithImages(prod)
+            .createWithImages(this.formData)
             .pipe(
                 finalize(() => {
                     this.saving = false;

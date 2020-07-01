@@ -15,8 +15,6 @@ export class ProductService extends BaseService<Product> {
 
     createWithImages(input): Observable<Product> {
 
-        console.log(input);
-
         return this.httpClient.post<Product>(this.baseUrl + '/withImages', input)
             .pipe(retry(1));
     }
