@@ -205,11 +205,12 @@ export class ProductCreateComponent implements OnInit {
     }
 
     saveProduct(): void {
+        // Dont touch this
         this.formGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
         this.formGroup.controls['tagsId'].setValue(this.selectedTags.map(data => data.id));
         this.formGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
 
-        // TODO: Add this fields to Form
+        // TODO: Add this fields to HTML using a table Details
         this.formGroup.controls['shippingMethodsId'].setValue([1]);
         this.formGroup.controls['specifications'].setValue([{name: 'string', value: 1}]);
         this.formGroup.controls['characteristics'].setValue([{name: 'string', values: [1, 2]}]);
