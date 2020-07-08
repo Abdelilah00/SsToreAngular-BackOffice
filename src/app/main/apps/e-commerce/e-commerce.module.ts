@@ -29,6 +29,7 @@ import {EcommerceOrderComponent} from 'app/main/apps/e-commerce/order/order.comp
 import {EcommerceOrderService} from 'app/main/apps/e-commerce/order/order.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProductUpdateComponent} from './product-update/product.component';
+import {GridModule, SharedModule} from '@progress/kendo-angular-grid';
 
 const routes: Routes = [
     {
@@ -101,6 +102,8 @@ const routes: Routes = [
         FuseSharedModule,
         FuseWidgetModule,
         MatAutocompleteModule,
+        GridModule,
+        SharedModule,
     ],
     providers: [
         EcommerceProductsService,

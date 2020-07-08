@@ -20,6 +20,7 @@ import {FakeDbService} from 'app/fake-db/fake-db.service';
 import {AppComponent} from 'app/app.component';
 import {AppStoreModule} from 'app/store/store.module';
 import {LayoutModule} from 'app/layout/layout.module';
+import {GridModule} from '@progress/kendo-angular-grid';
 
 
 const appRoutes: Routes = [
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         AppStoreModule,
+        GridModule,
 
     ],
     bootstrap: [

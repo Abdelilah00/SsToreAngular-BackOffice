@@ -46,102 +46,18 @@
 
         <!-- CONTENT CARD -->
         <div class="content-card">
-
-            <mat-table #table
-                       [@animateStagger]="{value:'50'}" [dataSource]="dataSource"
-                       class="products-table"
-                       fusePerfectScrollbar
-                       matSort>
-
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.id}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Image Column -->
-                <ng-container matColumnDef="image">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        <img *ngIf="product.featuredImageId"
-                             [alt]="product.name" [src]="product.images[product.featuredImageId].url"
-                             class="product-image"/>
-                        <img *ngIf="!product.featuredImageId"
-                             [src]="'assets/images/ecommerce/product-image-placeholder.png'">
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.name}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Category Column -->
-                <ng-container matColumnDef="category">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md mat-sort-header>Category</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-md>
-                        <p class="category text-truncate">
-                            {{product.categories[0]}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Price Column -->
-                <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs mat-sort-header>Price</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
-                        <p class="price text-truncate">
-                            {{product.priceTaxIncl | currency:'USD':'symbol'}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Quantity Column -->
-                <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm mat-sort-header>Quantity</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
-
-                        <span [ngClass]="{'red-500':product.quantity <= 5, 'amber-500':product.quantity > 5 && product.quantity <= 25,'green-600':product.quantity > 25}"
-                              class="quantity-indicator text-truncate">
-                        </span>
-                        <span>
-                            {{product.quantity}}
-                        </span>
-
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Active Column -->
-                <ng-container matColumnDef="active">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs mat-sort-header>Active</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
-                        <mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
-                        <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
-                <mat-row *matRowDef="let product; columns: displayedColumns;"
-                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle"
-                         class="product"
-                         matRipple>
-                </mat-row>
-
-            </mat-table>
-
-            <mat-paginator #paginator
-                           [length]="dataSource.filteredData.length"
-                           [pageIndex]="0"
-                           [pageSizeOptions]="[5, 10, 25, 100]"
-                           [pageSize]="10">
-            </mat-paginator>
-
+            <kendo-grid [data]="gridData" [height]="410">
+                <kendo-grid-column field="name" title="Name">
+                </kendo-grid-column>
+                <kendo-grid-column field="overview" title="overview">
+                </kendo-grid-column>
+                <kendo-grid-column field="comment" title="comment">
+                </kendo-grid-column>
+                <kendo-grid-column field="price" title="price">
+                </kendo-grid-column>
+                <kendo-grid-column field="qte" title="qte">
+                </kendo-grid-column>
+            </kendo-grid>
         </div>
         <!-- / CONTENT CARD -->
     </div>

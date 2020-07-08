@@ -10,6 +10,7 @@ import {FuseUtils} from '@fuse/utils';
 
 import {EcommerceProductsService} from 'app/main/apps/e-commerce/product-list/products.service';
 import {takeUntil} from 'rxjs/internal/operators';
+import {ProductService} from "../../../shared/services/product/product.service";
 
 @Component({
     selector: 'e-commerce-products',
@@ -19,6 +20,7 @@ import {takeUntil} from 'rxjs/internal/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class EcommerceProductsComponent implements OnInit {
+    gridData: any[];
     dataSource: FilesDataSource | null;
     displayedColumns = ['id', 'image', 'name', 'category', 'price', 'quantity', 'active'];
 
@@ -35,10 +37,12 @@ export class EcommerceProductsComponent implements OnInit {
     private _unsubscribeAll: Subject<any>;
 
     constructor(
-        private _ecommerceProductsService: EcommerceProductsService
+        private _ecommerceProductsService: EcommerceProductsService,
+        private _productService: ProductService
     ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        _productService.getAll().subscribe(data => this.gridData = data);
     }
 
     // -----------------------------------------------------------------------------------------------------
