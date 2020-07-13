@@ -4,9 +4,7 @@ import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {fuseAnimations} from '@fuse/animations';
-import {FuseUtils} from '@fuse/utils';
 
-import {EcommerceProductService} from 'app/main/apps/products/product/product-create/product.service';
 import {Product} from '../../../../shared/models/product.model';
 
 @Component({
@@ -25,13 +23,11 @@ export class ProductUpdateComponent implements OnInit {
     /**
      * Constructor
      *
-     * @param {EcommerceProductService} _ecommerceProductService
      * @param {FormBuilder} _formBuilder
      * @param {Location} _location
      * @param {MatSnackBar} _matSnackBar
      */
     constructor(
-        private _ecommerceProductService: EcommerceProductService,
         private _formBuilder: FormBuilder,
         private _location: Location,
         private _matSnackBar: MatSnackBar
@@ -79,41 +75,13 @@ export class ProductUpdateComponent implements OnInit {
      * Save product
      */
     saveProduct(): void {
-        const data = this.productForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.name);
 
-        this._ecommerceProductService.saveProduct(data)
-            .then(() => {
-
-                // Trigger the subscription with new data
-                this._ecommerceProductService.onProductChanged.next(data);
-
-                // Show the success message
-                this._matSnackBar.open('Product saved', 'OK', {
-                    verticalPosition: 'top',
-                    duration: 2000
-                });
-            });
     }
 
     /**
      * Add product
      */
     addProduct(): void {
-        const data = this.productForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.name);
 
-        this._ecommerceProductService.addProduct(data)
-            .then(() => {
-
-                // Trigger the subscription with new data
-                this._ecommerceProductService.onProductChanged.next(data);
-
-                // Show the success message
-                this._matSnackBar.open('Product added', 'OK', {
-                    verticalPosition: 'top',
-                    duration: 2000
-                });
-            });
     }
 }

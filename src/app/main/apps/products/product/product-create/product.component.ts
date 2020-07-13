@@ -33,6 +33,7 @@ export class ProductCreateComponent implements OnInit {
     @ViewChild('categoryInput', {static: false}) categoryInput: ElementRef<HTMLInputElement>;
     @ViewChild('tagInput', {static: false}) tagInput: ElementRef<HTMLInputElement>;
     @ViewChild('wareHouseInput', {static: false}) wareHouseInput: ElementRef<HTMLInputElement>;
+
     @ViewChild('autoCategory', {static: false}) matAutocompleteCategory: MatAutocomplete;
     @ViewChild('autoTag', {static: false}) matAutocompleteTag: MatAutocomplete;
     @ViewChild('autoWareHouse', {static: false}) matAutocompleteWareHouse: MatAutocomplete;
@@ -218,6 +219,7 @@ export class ProductCreateComponent implements OnInit {
         this.formData.append('product', JSON.stringify(this.formGroup.value as Product));
 
         this.saving = true;
+
         this._service
             .createWithImages(this.formData)
             .pipe(
