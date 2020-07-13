@@ -6,8 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {fuseAnimations} from '@fuse/animations';
 import {FuseUtils} from '@fuse/utils';
 
-import {EcommerceProductService} from 'app/main/apps/e-commerce/product-create/product.service';
-import {Product} from '../../../shared/models/product.model';
+import {EcommerceProductService} from 'app/main/apps/products/product/product-create/product.service';
+import {Product} from '../../../../shared/models/product.model';
 
 @Component({
     selector: 'e-commerce-product',

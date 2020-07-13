@@ -31,40 +31,19 @@ export const navigation: FuseNavigation[] = [
             },
 
             {
-                id: 'e-commerce',
-                title: 'E-Commerce',
+                id: 'products',
+                title: 'Products',
                 translate: 'NAV.ECOMMERCE',
                 type: 'collapsable',
                 icon: 'shopping_cart',
                 children: [
                     {
-                        id: 'products',
-                        title: 'Products',
+                        id: 'product',
+                        title: 'Product',
                         type: 'item',
-                        url: '/apps/e-commerce/products',
+                        url: '/apps/products/product',
                         exactMatch: true
                     },
-                    {
-                        id: 'productDetail',
-                        title: 'Product Detail',
-                        type: 'item',
-                        url: '/apps/e-commerce/products/1/printed-dress',
-                        exactMatch: true
-                    },
-                    {
-                        id: 'orders',
-                        title: 'Orders',
-                        type: 'item',
-                        url: '/apps/e-commerce/orders',
-                        exactMatch: true
-                    },
-                    {
-                        id: 'orderDetail',
-                        title: 'Order Detail',
-                        type: 'item',
-                        url: '/apps/e-commerce/orders/1',
-                        exactMatch: true
-                    }
                 ]
             },
         ]

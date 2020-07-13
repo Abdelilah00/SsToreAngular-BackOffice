@@ -4,18 +4,18 @@ import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {fuseAnimations} from '@fuse/animations';
-import {ProductService} from '../../../shared/services/product/product.service';
+import {ProductService} from '../../../../shared/services/product/product.service';
 import {finalize, map, startWith} from 'rxjs/operators';
-import {TagService} from '../../../shared/services/tag/tag.service';
-import {CategoryService} from '../../../shared/services/category/category.service';
+import {TagService} from '../../../../shared/services/tag/tag.service';
+import {CategoryService} from '../../../../shared/services/category/category.service';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {WareHouseService} from '../../../shared/services/ware-house/ware-house.service';
-import {Category} from '../../../shared/models/category.model';
-import {Tag} from '../../../shared/models/tag.model';
-import {WareHouse} from '../../../shared/models/ware-house.model';
-import {Product} from '../../../shared/models/product.model';
+import {WareHouseService} from '../../../../shared/services/ware-house/ware-house.service';
+import {Category} from '../../../../shared/models/category.model';
+import {Tag} from '../../../../shared/models/tag.model';
+import {WareHouse} from '../../../../shared/models/ware-house.model';
+import {Product} from '../../../../shared/models/product.model';
 
 @Component({
     selector: 'e-commerce-product',

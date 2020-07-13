@@ -28,13 +28,13 @@
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for a product">
+                    <input placeholder="Search for a product">
                 </div>
             </div>
             <!-- / SEARCH -->
 
             <!-- ADD BUTTON -->
-            <button [routerLink]="'/apps/e-commerce/products/new'"
+            <button [routerLink]="['../create']"
                     class="add-product-button fuse-white mt-24 mt-md-0"
                     mat-raised-button>
                 <span>ADD NEW PRODUCT</span>
