@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {ShippingMethodListComponent} from './shipping-method-list/shipping-method-list.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [ShippingMethodListComponent],
     imports: [
         CommonModule
     ]
