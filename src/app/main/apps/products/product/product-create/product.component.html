@@ -170,15 +170,28 @@
                         <!-- Start Hard work with Details Grid -->
                         <mat-tab label="Shipping">
 
-                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column"
+                                 fxLayoutAlign="none center">
+                                <div fxLayout='row'>
+                                    <h5 class="card-header">Characteristics</h5>
+                                    <button mat-fab color="accent" aria-label="Add Characteristic"
+                                            (click)='addCharacteristcTable()'>
+                                        <mat-icon>add</mat-icon>
+                                    </button>
 
-                                <app-specifications-grid
-                                    (specificationsChange)='setSpecifications($event)'></app-specifications-grid>
+                                </div>
 
-                                <app-characteristics-grid
-                                    (characteristicsChange)='setCharacteristics($event)'></app-characteristics-grid>
+                                <app-characteristics-grid fxFlex="80%" *ngFor='let fa of formArray.controls'
+                                                          (characteristicsChange)='setCharacteristics($event)'></app-characteristics-grid>
 
-                                <app-shipped-by-grid (shippedByChange)='setShippedBy($event)'></app-shipped-by-grid>
+                                <div fxLayout="row" fxLayout.sm="column">
+                                    <app-specifications-grid fxFlex="50%"
+                                                             (specificationsChange)='setSpecifications($event)'></app-specifications-grid>
+
+                                    <app-shipped-by-grid fxFlex="50%"
+                                                         (shippedByChange)='setShippedBy($event)'></app-shipped-by-grid>
+                                </div>
+
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Ware House</mat-label>

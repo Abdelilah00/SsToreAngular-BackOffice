@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -57,7 +57,7 @@ export class ProductCreateComponent implements OnInit {
     filtredWareHouses: Observable<WareHouse[]>;
     selectedWareHouses = new Array<WareHouse>();
     allWareHouses = new Array<WareHouse>();
-
+    formArray: FormArray = new FormArray([]);
     private editedRowIndex: number;
 
     /**
@@ -147,6 +147,8 @@ export class ProductCreateComponent implements OnInit {
      */
 
     ngOnInit(): void {
+
+
         this._categoryService.getAll().subscribe(data => {
             this.allCategories = data;
             this.filtredCategories = this.formGroup.controls['categoriesId'].valueChanges.pipe(
@@ -264,6 +266,12 @@ export class ProductCreateComponent implements OnInit {
 
     setShippedBy(ship): void {
         this.formGroup.controls['shippedBy'].setValue(ship);
+    }
+
+    addCharacteristcTable(): void {
+        this.formArray.push(this._formBuilder.group({
+            value: ['', Validators.required]
+        }));
     }
 
     // Kendo

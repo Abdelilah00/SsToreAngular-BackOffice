@@ -83,8 +83,7 @@ export class CharacteristicsGridComponent implements OnInit {
     private createFormGroup(product: any = {}): FormGroup {
         // create a new form group containing controls and validators for a product
         return this.formBuilder.group({
-            name: [product.name, Validators.required],
-            value: [FormArray, Validators.required]
+            value: ['', Validators.required]
         });
     }
 }

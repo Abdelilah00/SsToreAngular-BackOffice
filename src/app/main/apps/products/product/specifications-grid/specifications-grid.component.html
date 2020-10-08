@@ -1,4 +1,4 @@
-<div class="card m-3">
+<div class="card m-20">
     <h5 class="card-header">Specifications</h5>
     <div class="card-body">
         <kendo-grid #grid [data]="specifications" (change)='onGridChange()'>
@@ -10,7 +10,7 @@
             <kendo-grid-column field="name"></kendo-grid-column>
             <kendo-grid-column field="value"></kendo-grid-column>
 
-            <kendo-grid-column>
+            <kendo-grid-column width='100'>
                 <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                     <button (click)="onRemove(rowIndex)" class="k-button">Remove</button>
                 </ng-template>
