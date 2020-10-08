@@ -1,0 +1,22 @@
+<div class="card m-3">
+    <h5 class="card-header">Specifications</h5>
+    <div class="card-body">
+        <kendo-grid #grid [data]="specifications" (change)='onGridChange()'>
+            <ng-template kendoGridToolbarTemplate>
+                <button (click)="onAdd()" class="k-button">Add</button>
+
+            </ng-template>
+
+            <kendo-grid-column field="name"></kendo-grid-column>
+            <kendo-grid-column field="value"></kendo-grid-column>
+
+            <kendo-grid-column>
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    <button (click)="onRemove(rowIndex)" class="k-button">Remove</button>
+                </ng-template>
+            </kendo-grid-column>
+
+        </kendo-grid>
+    </div>
+</div>
+

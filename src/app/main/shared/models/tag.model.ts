@@ -2,5 +2,5 @@ import {BaseModel} from './base-model.model';
 
 export class Tag extends BaseModel {
     id: number;
-    name: string;
+    tagName: string;
 }

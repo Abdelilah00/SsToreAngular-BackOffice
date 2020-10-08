@@ -43,6 +43,9 @@ export class ProductCreateComponent implements OnInit {
     formGroup = this.createProductFormGroup();
     formData = new FormData();
 
+    // Specifications
+
+
     filtredCategories: Observable<Category[]>;
     selectedCategories = new Array<Category>();
     allCategories = new Array<Category>();
@@ -54,6 +57,8 @@ export class ProductCreateComponent implements OnInit {
     filtredWareHouses: Observable<WareHouse[]>;
     selectedWareHouses = new Array<WareHouse>();
     allWareHouses = new Array<WareHouse>();
+
+    private editedRowIndex: number;
 
     /**
      * Constructor
@@ -114,7 +119,7 @@ export class ProductCreateComponent implements OnInit {
     selectedTag(event: MatAutocompleteSelectedEvent): void {
         const tag = new Tag();
         tag.id = event.option.value;
-        tag.name = event.option.viewValue;
+        tag.tagName = event.option.viewValue;
         this.selectedTags.push(tag);
         this.tagInput.nativeElement.value = '';
         this.formGroup.controls['tagsId'].setValue(null);
@@ -173,17 +178,19 @@ export class ProductCreateComponent implements OnInit {
         return this._formBuilder.group({
             name: ['test', Validators.required],
             comment: ['test', Validators.required],
-            price: ['10', Validators.nullValidator],
+            salePrice: ['10', Validators.nullValidator],
             qte: ['1000', Validators.nullValidator],
             overview: ['test', Validators.nullValidator],
 
             tagsId: ['', Validators.nullValidator],
             categoriesId: ['', Validators.nullValidator],
             wareHousesId: ['', Validators.nullValidator],
-            shippingMethodsId: ['', Validators.nullValidator],
 
             images: [null, Validators.nullValidator],
+
+
             specifications: ['', Validators.nullValidator],
+            shippedBy: ['', Validators.nullValidator],
             characteristics: ['', Validators.nullValidator],
         });
     }
@@ -212,10 +219,9 @@ export class ProductCreateComponent implements OnInit {
         this.formGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
 
         // TODO: Add this fields to HTML using a table Details
-        this.formGroup.controls['shippingMethodsId'].setValue([1]);
-        this.formGroup.controls['specifications'].setValue([{name: 'string', value: 1}]);
-        this.formGroup.controls['characteristics'].setValue([{name: 'string', values: [1, 2]}]);
+        this.formGroup.controls['shippedBy'].setValue([1]);
 
+        this.formData.delete('product');
         this.formData.append('product', JSON.stringify(this.formGroup.value as Product));
 
         this.saving = true;
@@ -246,7 +252,20 @@ export class ProductCreateComponent implements OnInit {
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
+    // kendo
+    setSpecifications(specs): void {
+        this.formGroup.controls['specifications'].setValue(specs);
+    }
 
+    setCharacteristics(chars): void {
+        this.formGroup.controls['characteristics'].setValue(chars);
+    }
+
+    setShippedBy(ship): void {
+        this.formGroup.controls['shippedBy'].setValue(ship);
+    }
+
+    // Kendo
     goBack(): void {
         this._location.back();
     }
@@ -258,7 +277,7 @@ export class ProductCreateComponent implements OnInit {
 
     private _filterTag(value: string): Tag[] {
         const filterValue = value.toString().toLowerCase();
-        return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
+        return this.allTags.filter(tag => tag.tagName.toLowerCase().indexOf(filterValue) === 0);
     }
 
     private _filterWareHouse(value: string): WareHouse[] {

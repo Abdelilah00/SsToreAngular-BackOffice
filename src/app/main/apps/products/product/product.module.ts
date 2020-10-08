@@ -5,6 +5,11 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {FuseSharedModule} from '../../../../../@fuse/shared.module';
 import {ProductCreateComponent} from './product-create/product.component';
 import {ProductUpdateComponent} from './product-update/product.component';
+import {BodyModule, SharedModule} from "@progress/kendo-angular-grid";
+import {SpecificationsGridComponent} from "./specifications-grid/specifications-grid.component";
+import {CharacteristicsGridComponent} from "./characteristics-grid/characteristics-grid.component";
+import {ShippedByGridComponent} from "./shipped-by-grid/shipped-by-grid.component";
+import {CharacteristicsDetailsGridComponent} from "./characteristics-details-grid/characteristics-details-grid.component";
 
 const routes: Routes = [
     {
@@ -31,9 +36,13 @@ const routes: Routes = [
     exports: ProductModule.COMPONENT_LIST,
     imports: [
         RouterModule.forChild(routes),
-        FuseSharedModule
+        FuseSharedModule,
+        SharedModule,
+        BodyModule
     ]
 })
 export class ProductModule {
-    static readonly COMPONENT_LIST = [ProductListComponent, ProductCreateComponent, ProductUpdateComponent];
+    static readonly COMPONENT_LIST = [ProductListComponent, ProductCreateComponent,
+        ProductUpdateComponent, SpecificationsGridComponent, CharacteristicsGridComponent,
+        ShippedByGridComponent, CharacteristicsDetailsGridComponent];
 }

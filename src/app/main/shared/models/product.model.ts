@@ -23,7 +23,7 @@ export class Product extends BaseModel {
 
     name: string;
     comment: string;
-    price: number;
+    salePrice: number;
     qte: number;
 
     images: Blob;

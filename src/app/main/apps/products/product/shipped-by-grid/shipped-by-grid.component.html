@@ -1,0 +1,23 @@
+<div class="card m-3">
+    <h5 class="card-header">Shipped By</h5>
+    <div class="card-body">
+        <kendo-grid #grid [data]="shippedBy" (change)='onGridChange()'>
+            <ng-template kendoGridToolbarTemplate>
+                <button (click)="onAdd()" class="k-button">Add</button>
+
+            </ng-template>
+
+            <kendo-grid-column field="amount"></kendo-grid-column>
+            <kendo-grid-column field="shippingCountryId"></kendo-grid-column>
+            <kendo-grid-column field="shippingMethodId" type='number'></kendo-grid-column>
+
+            <kendo-grid-column>
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    <button (click)="onRemove(rowIndex)" class="k-button">Remove</button>
+                </ng-template>
+            </kendo-grid-column>
+
+        </kendo-grid>
+    </div>
+</div>
+

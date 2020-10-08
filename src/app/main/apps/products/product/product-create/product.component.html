@@ -34,7 +34,7 @@
             <!-- / APP TITLE -->
 
             <button (click)="saveProduct()"
-                    [disabled]="formGroup.invalid"
+                    [disabled]="formGroup?.invalid"
                     class="save-product-button" mat-raised-button>
                 <span>SAVE</span>
             </button>
@@ -60,15 +60,19 @@
                                     <mat-label>Product Name</mat-label>
                                     <input formControlName="name" matInput
                                            name="name"
-                                           placeholder="Product Name"
-                                    >
+                                           placeholder="Product Name">
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Product Description</mat-label>
-                                    <textarea formControlName="comment" matInput
-                                              name="comment"
-                                              placeholder="Product Description"
+                                    <input formControlName="overview" matInput
+                                           placeholder="Product Description">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                                    <mat-label>Product overview</mat-label>
+                                    <textarea formControlName="overview" matInput
+                                              placeholder="overview"
                                               rows="5">
                                     </textarea>
                                 </mat-form-field>
@@ -104,11 +108,11 @@
 
                                     <mat-chip-list #tagList>
                                         <mat-chip
-                                            (removed)="removeTag(tag.name)"
+                                            (removed)="removeTag(tag.tagName)"
                                             *ngFor="let tag of selectedTags"
                                             [removable]="removable"
                                             [selectable]="selectable">
-                                            {{tag.name}}
+                                            {{tag.tagName}}
                                             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
                                         </mat-chip>
                                         <input
@@ -120,7 +124,7 @@
 
                                     <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
                                         <mat-option *ngFor="let tag of filtredTags | async" [value]="tag.id">
-                                            {{tag.name}}
+                                            {{tag.tagName}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
@@ -145,10 +149,9 @@
                             <div class="tab-content p-24" fusePerfectScrollbar>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>Price</mat-label>
-                                    <input formControlName="price" matInput
-                                           name="price"
-                                           placeholder="Price"
+                                    <mat-label>Sale Price</mat-label>
+                                    <input formControlName="salePrice" matInput
+                                           placeholder="Sale Price"
                                            type="number">
                                     <span matPrefix>$&nbsp;</span>
                                 </mat-form-field>
@@ -156,53 +159,26 @@
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>qte</mat-label>
                                     <input formControlName="qte" matInput
-                                           name="qte"
                                            placeholder="Qte"
                                            type="number">
-                                    <span matPrefix>$&nbsp;</span>
                                 </mat-form-field>
 
 
                             </div>
                         </mat-tab>
 
+                        <!-- Start Hard work with Details Grid -->
                         <mat-tab label="Shipping">
 
                             <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
 
-                                <div fxLayout="row" fxLayoutAlign="space-between">
-                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
-                                                    fxFlex="30">
-                                        <mat-label>Product overview</mat-label>
-                                        <textarea formControlName="overview" matInput
-                                                  name="overview"
-                                                  placeholder="overview"
-                                                  rows="5">
-                                    </textarea>
-                                    </mat-form-field>
+                                <app-specifications-grid
+                                    (specificationsChange)='setSpecifications($event)'></app-specifications-grid>
 
-                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
-                                                    fxFlex="30">
-                                        <mat-label>Product specifications</mat-label>
-                                        <textarea formControlName="specifications" matInput
-                                                  name="specifications"
-                                                  placeholder="specifications"
-                                                  rows="5">
-                                    </textarea>
-                                    </mat-form-field>
+                                <app-characteristics-grid
+                                    (characteristicsChange)='setCharacteristics($event)'></app-characteristics-grid>
 
-                                    <mat-form-field appearance="outline" class="w-100-p" floatLabel="always"
-                                                    fxFlex="30">
-                                        <mat-label>Product characteristic</mat-label>
-                                        <textarea formControlName="characteristics" matInput
-                                                  name="characteristics"
-                                                  placeholder="characteristics"
-                                                  rows="5">
-                                    </textarea>
-                                    </mat-form-field>
-
-
-                                </div>
+                                <app-shipped-by-grid (shippedByChange)='setShippedBy($event)'></app-shipped-by-grid>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
                                     <mat-label>Ware House</mat-label>

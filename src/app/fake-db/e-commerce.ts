@@ -1615,7 +1615,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -1623,7 +1623,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -1631,7 +1631,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -1699,7 +1699,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -1707,7 +1707,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -1715,7 +1715,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -1783,7 +1783,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -1791,7 +1791,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -1799,7 +1799,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -1867,7 +1867,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -1875,7 +1875,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -1883,7 +1883,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -1951,7 +1951,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -1959,7 +1959,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -1967,7 +1967,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2035,7 +2035,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2043,7 +2043,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2051,7 +2051,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2119,7 +2119,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2127,7 +2127,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2135,7 +2135,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2203,7 +2203,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2211,7 +2211,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2219,7 +2219,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2287,7 +2287,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2295,7 +2295,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2303,7 +2303,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2371,7 +2371,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2379,7 +2379,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2387,7 +2387,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2455,7 +2455,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2463,7 +2463,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2471,7 +2471,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2539,7 +2539,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2547,7 +2547,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2555,7 +2555,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2623,7 +2623,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2631,7 +2631,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2639,7 +2639,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2707,7 +2707,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2715,7 +2715,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2723,7 +2723,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2791,7 +2791,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2799,7 +2799,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2807,7 +2807,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2875,7 +2875,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2883,7 +2883,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2891,7 +2891,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -2959,7 +2959,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -2967,7 +2967,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -2975,7 +2975,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -3043,7 +3043,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -3051,7 +3051,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -3059,7 +3059,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -3127,7 +3127,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -3135,7 +3135,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -3143,7 +3143,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
@@ -3211,7 +3211,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 1,
                     'name': 'A Walk Amongst Friends - Canvas Print',
-                    'price': '10.24',
+                    'salePrice': '10.24',
                     'quantity': 1,
                     'total': '10.24',
                     'image': 'assets/images/ecommerce/a-walk-amongst-friends.jpg'
@@ -3219,7 +3219,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 2,
                     'name': 'Lago di Braies - Canvas Print',
-                    'price': '24.62',
+                    'salePrice': '24.62',
                     'quantity': 1,
                     'total': '24.62',
                     'image': 'assets/images/ecommerce/lago-di-braies.jpg'
@@ -3227,7 +3227,7 @@ export class ECommerceFakeDb {
                 {
                     'id': 3,
                     'name': 'Never Stop Changing - Canvas Print',
-                    'price': '49.29',
+                    'salePrice': '49.29',
                     'quantity': 1,
                     'total': '49.29',
                     'image': 'assets/images/ecommerce/never-stop-changing.jpg'
