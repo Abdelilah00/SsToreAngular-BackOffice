@@ -8,9 +8,9 @@ import {GridComponent} from "@progress/kendo-angular-grid";
     styleUrls: ['./characteristics-details-grid.component.scss']
 })
 export class CharacteristicsDetailsGridComponent implements OnInit {
-    @Input() public characteristicName: Object;
+    @Input() public characteristic: { name: string };
     characteristicsDetails = [];
-    @Output() characteristicsDetailsChange = new EventEmitter<any>();
+    @Output() characteristicsDetailsChange = new EventEmitter<{ name: string, values: string[] }>();
     characteristicsDetailsForm: FormGroup;
     @ViewChild('gridCharacteristicsDetails', {static: false}) grid: GridComponent;
 
@@ -43,23 +43,21 @@ export class CharacteristicsDetailsGridComponent implements OnInit {
     }
 
     onRemove(index): void {
-        // rows must all be closed while removing products
-        this.closeAllRows();
-
         // remove product and product form group
         this.characteristicsDetails.splice(index, 1);
         this.formArray.removeAt(index);
 
         // reset all rows back to edit mode
-        this.editAllRows();
+        //this.editAllRows();
     }
 
     // helper methods
 
     public onGridChange(): void {
-        //this.characteristicsDetails = this.formArray.value;
-        //this.characteristicsDetailsChange.emit(this.characteristicsDetails);
-        console.table(this.formArray.value);
+        this.closeAllRows();
+        this.characteristicsDetails = this.formArray.value;
+        const tmp = {name: this.characteristic['name'], values: this.formArray.value};
+        this.characteristicsDetailsChange.emit(tmp);
     }
 
     private editAllRows(): void {

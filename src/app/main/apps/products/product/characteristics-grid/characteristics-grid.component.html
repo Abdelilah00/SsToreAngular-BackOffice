@@ -15,7 +15,8 @@
             </kendo-grid-column>
 
             <div *kendoGridDetailTemplate="let dataItem">
-                <app-characteristics-details-grid [characteristicName]='dataItem'></app-characteristics-details-grid>
+                <app-characteristics-details-grid [characteristic]="dataItem"
+                                                  (characteristicsDetailsChange)='setDetails($event)'></app-characteristics-details-grid>
             </div>
         </kendo-grid>
     </div>

@@ -259,6 +259,7 @@ export class ProductCreateComponent implements OnInit {
 
     setCharacteristics(chars): void {
         this.formGroup.controls['characteristics'].setValue(chars);
+        console.log(chars);
     }
 
     setShippedBy(ship): void {

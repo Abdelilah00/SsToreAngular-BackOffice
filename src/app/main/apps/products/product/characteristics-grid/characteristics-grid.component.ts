@@ -43,22 +43,25 @@ export class CharacteristicsGridComponent implements OnInit {
     }
 
     onRemove(index): void {
-        // rows must all be closed while removing products
-        this.closeAllRows();
 
         // remove product and product form group
         this.characteristics.splice(index, 1);
         this.formArray.removeAt(index);
 
         // reset all rows back to edit mode
-        this.editAllRows();
+        //this.editAllRows();
+    }
+
+    public onGridChange(): void {
+        this.closeAllRows();
+        this.characteristics = this.formArray.value;
+        this.characteristicsChange.emit(this.characteristics);
     }
 
     // helper methods
 
-    public onGridChange(): void {
-        this.characteristics = this.formArray.value;
-        this.characteristicsChange.emit(this.characteristics);
+    private setDetails(charsDetails): void {
+        this.characteristics.find(elem => elem.name === charsDetails.name).value = charsDetails.values;
     }
 
     private editAllRows(): void {
@@ -81,6 +84,7 @@ export class CharacteristicsGridComponent implements OnInit {
         // create a new form group containing controls and validators for a product
         return this.formBuilder.group({
             name: [product.name, Validators.required],
+            value: [FormArray, Validators.required]
         });
     }
 }
