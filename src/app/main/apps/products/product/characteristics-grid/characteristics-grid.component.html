@@ -1,12 +1,12 @@
-<div class="card m-20" fxLayout='row' fxLayoutAlign="space-evenly center">
+<div class="card m-20" fxLayout='row' fxLayoutAlign="space-evenly center" (change)='onGridChange()'>
     <mat-form-field appearance="outline" class="w-100-p m-10" floatLabel="always" fxFlex='25'>
         <mat-label>Characteristic Name</mat-label>
-        <input matInput
+        <input matInput #inputElement
                placeholder="Name">
     </mat-form-field>
 
     <div class="card-body m-10" fxFlex='65'>
-        <kendo-grid #gridCharacteristics [data]="characteristics" (change)='onGridChange()'>
+        <kendo-grid #gridCharacteristics [data]="characteristics">
             <ng-template kendoGridToolbarTemplate>
                 <button (click)="onAdd()" class="k-button">Add</button>
             </ng-template>
@@ -21,7 +21,7 @@
         </kendo-grid>
     </div>
 
-    <button mat-fab color="warn" aria-label="Remove">
+    <button mat-fab color="warn" aria-label="Remove" (click)='remove()'>
         <mat-icon>delete</mat-icon>
     </button>
 </div>

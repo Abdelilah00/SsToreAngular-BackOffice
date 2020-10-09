@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GridComponent} from "@progress/kendo-angular-grid";
 
@@ -11,8 +11,10 @@ export class CharacteristicsGridComponent implements OnInit {
 
     characteristics = [];
     @Output() characteristicsChange = new EventEmitter<any>();
+    @Output() removeCharacteristicsChange = new EventEmitter<any>();
     characteristicsForm: FormGroup;
     @ViewChild('gridCharacteristics', {static: true}) grid: GridComponent;
+    @ViewChild('inputElement', {static: true}) input: ElementRef<HTMLInputElement>;
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -50,15 +52,21 @@ export class CharacteristicsGridComponent implements OnInit {
 
         // reset all rows back to edit mode
         //this.editAllRows();
+        this.onGridChange();
     }
 
     public onGridChange(): void {
         this.closeAllRows();
         this.characteristics = this.formArray.value;
-        this.characteristicsChange.emit(this.characteristics);
+        let tmp = {name: this.input.nativeElement.value, values: this.characteristics};
+        this.characteristicsChange.emit(tmp);
     }
 
     // helper methods
+
+    remove(): void {
+        this.removeCharacteristicsChange.emit(this.input.nativeElement.value);
+    }
 
     private setDetails(charsDetails): void {
         this.characteristics.find(elem => elem.name === charsDetails.name).value = charsDetails.values;
@@ -78,7 +86,6 @@ export class CharacteristicsGridComponent implements OnInit {
             this.grid.closeRow(i);
         });
     }
-
 
     private createFormGroup(product: any = {}): FormGroup {
         // create a new form group containing controls and validators for a product

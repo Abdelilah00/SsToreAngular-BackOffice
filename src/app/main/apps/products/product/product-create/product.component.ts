@@ -57,8 +57,8 @@ export class ProductCreateComponent implements OnInit {
     filtredWareHouses: Observable<WareHouse[]>;
     selectedWareHouses = new Array<WareHouse>();
     allWareHouses = new Array<WareHouse>();
-    formArray: FormArray = new FormArray([]);
-    private editedRowIndex: number;
+
+    enableAddTableButton = true;
 
     /**
      * Constructor
@@ -79,6 +79,10 @@ export class ProductCreateComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _location: Location,
         private _matSnackBar: MatSnackBar) {
+    }
+
+    get formArray(): FormArray {
+        return this.formGroup.get('characteristics') as FormArray;
     }
 
     findWithAttr(array, attr, value): number {
@@ -171,6 +175,10 @@ export class ProductCreateComponent implements OnInit {
         });
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // @ Lifecycle hooks
+    // -----------------------------------------------------------------------------------------------------
+
     /**
      * Create product form
      *
@@ -181,7 +189,7 @@ export class ProductCreateComponent implements OnInit {
             name: ['test', Validators.required],
             comment: ['test', Validators.required],
             salePrice: ['10', Validators.nullValidator],
-            qte: ['1000', Validators.nullValidator],
+            initQte: ['1000', Validators.nullValidator],
             overview: ['test', Validators.nullValidator],
 
             tagsId: ['', Validators.nullValidator],
@@ -190,16 +198,11 @@ export class ProductCreateComponent implements OnInit {
 
             images: [null, Validators.nullValidator],
 
-
             specifications: ['', Validators.nullValidator],
             shippedBy: ['', Validators.nullValidator],
-            characteristics: ['', Validators.nullValidator],
+            characteristics: this._formBuilder.array([this.createFromGroupCharacteristics()]),
         });
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
 
     /**
      * Save product
@@ -214,6 +217,10 @@ export class ProductCreateComponent implements OnInit {
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
+
     saveProduct(): void {
         // Dont touch this
         this.formGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
@@ -222,6 +229,11 @@ export class ProductCreateComponent implements OnInit {
 
         // TODO: Add this fields to HTML using a table Details
         this.formGroup.controls['shippedBy'].setValue([1]);
+        // tronsform formArray to Simple Array
+        const tmp = this.formArray.value.map(val => {
+            return {name: val.name, values: val.values.map(v => v.value)};
+        });
+        this.formGroup.controls['characteristics'].setValue(tmp);
 
         this.formData.delete('product');
         this.formData.append('product', JSON.stringify(this.formGroup.value as Product));
@@ -251,17 +263,25 @@ export class ProductCreateComponent implements OnInit {
 
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
     // kendo
     setSpecifications(specs): void {
         this.formGroup.controls['specifications'].setValue(specs);
     }
 
     setCharacteristics(chars): void {
-        this.formGroup.controls['characteristics'].setValue(chars);
-        console.log(chars);
+        const tmp = this.formArray.controls.find(ctrl => ctrl.value.name === '' || chars.name);
+
+        if (tmp !== undefined) {
+            tmp.setValue(chars);
+        }
+
+        console.log(this.formArray.value);
+
+        // enable button if name && value not null
+        this.enableAddTableButton = this.formArray.controls.some(ctrl => ctrl.value.name !== ''
+            && ctrl.value.values !== undefined
+            && ctrl.value.values.length > 0
+            && ctrl.value.values.some(vl => vl.value !== ''));
     }
 
     setShippedBy(ship): void {
@@ -269,9 +289,20 @@ export class ProductCreateComponent implements OnInit {
     }
 
     addCharacteristcTable(): void {
-        this.formArray.push(this._formBuilder.group({
-            value: ['', Validators.required]
-        }));
+        this.formArray.push(this.createFromGroupCharacteristics());
+        this.enableAddTableButton = false;
+    }
+
+    removeCharacteristicTable(name: any): void {
+        const index = this.formArray.controls.map(ctrl => ctrl.value.name).indexOf(name);
+        this.formArray.removeAt(index);
+    }
+
+    createFromGroupCharacteristics(): FormGroup {
+        return this._formBuilder.group({
+            name: ['', Validators.required],
+            values: ['', Validators.required]
+        });
     }
 
     // Kendo

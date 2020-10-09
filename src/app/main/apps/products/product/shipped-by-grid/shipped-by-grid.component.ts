@@ -52,6 +52,8 @@ export class ShippedByGridComponent implements OnInit {
 
         // reset all rows back to edit mode
         this.editAllRows();
+        this.onGridChange();
+
     }
 
     public onGridChange(): void {

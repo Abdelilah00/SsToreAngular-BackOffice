@@ -12,7 +12,7 @@ import {ProductService} from '../../../../shared/services/product/product.servic
 })
 export class ProductListComponent implements OnInit {
     gridData: any[];
-    displayedColumns = ['id', 'image', 'name', 'category', 'price', 'quantity', 'active'];
+    displayedColumns = ['id', 'image', 'name', 'category', 'price', 'stockQte', 'initQte', 'active'];
 
     constructor(
         private _productService: ProductService

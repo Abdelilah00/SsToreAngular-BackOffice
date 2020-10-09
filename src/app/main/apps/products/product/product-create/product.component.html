@@ -157,9 +157,9 @@
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
-                                    <mat-label>qte</mat-label>
-                                    <input formControlName="qte" matInput
-                                           placeholder="Qte"
+                                    <mat-label>init Qte</mat-label>
+                                    <input formControlName="initQte" matInput
+                                           placeholder="init Qte"
                                            type="number">
                                 </mat-form-field>
 
@@ -175,14 +175,43 @@
                                 <div fxLayout='row'>
                                     <h5 class="card-header">Characteristics</h5>
                                     <button mat-fab color="accent" aria-label="Add Characteristic"
+                                            [disabled]='!enableAddTableButton'
                                             (click)='addCharacteristcTable()'>
                                         <mat-icon>add</mat-icon>
                                     </button>
 
                                 </div>
 
-                                <app-characteristics-grid fxFlex="80%" *ngFor='let fa of formArray.controls'
-                                                          (characteristicsChange)='setCharacteristics($event)'></app-characteristics-grid>
+                                <div class="card m-20" fxLayout='row' fxLayoutAlign="space-evenly center"
+                                     (change)='onGridChange()'>
+                                    <mat-form-field appearance="outline" class="w-100-p m-10" floatLabel="always"
+                                                    fxFlex='25'>
+                                        <mat-label>Characteristic Name</mat-label>
+                                        <input matInput #inputElement
+                                               placeholder="Name">
+                                    </mat-form-field>
+
+                                    <div class="card-body m-10" fxFlex="80%" *ngFor='let fa of formArray.controls'>
+                                        <kendo-grid #gridCharacteristics [data]="characteristics">
+                                            <ng-template kendoGridToolbarTemplate>
+                                                <button (click)="onAdd()" class="k-button">Add</button>
+                                            </ng-template>
+
+                                            <kendo-grid-column field="value"></kendo-grid-column>
+
+                                            <kendo-grid-column width='100'>
+                                                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                                                    <button (click)="onRemove(rowIndex)" class="k-button">Remove
+                                                    </button>
+                                                </ng-template>
+                                            </kendo-grid-column>
+                                        </kendo-grid>
+                                    </div>
+
+                                    <button mat-fab color="warn" aria-label="Remove" (click)='remove()'>
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
 
                                 <div fxLayout="row" fxLayout.sm="column">
                                     <app-specifications-grid fxFlex="50%"

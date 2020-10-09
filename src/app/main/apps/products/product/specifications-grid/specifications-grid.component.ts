@@ -53,6 +53,8 @@ export class SpecificationsGridComponent implements OnInit {
 
         // reset all rows back to edit mode
         this.editAllRows();
+        this.onGridChange();
+
     }
 
     public onGridChange(): void {

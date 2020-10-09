@@ -24,7 +24,8 @@ export class Product extends BaseModel {
     name: string;
     comment: string;
     salePrice: number;
-    qte: number;
+    stockQte: number;
+    initQte: number;
 
     images: Blob;
     overview: string;
