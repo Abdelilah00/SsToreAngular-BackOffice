@@ -1,3 +1,61 @@
-<p>
-    shipping-method-list works!
-</p>
+<div class="page-layout carded fullwidth inner-scroll" id="products">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="column" fxLayout.gt-sm="row"
+             fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0"
+                 fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" class="logo-icon s-32 mr-16">
+                    shopping_basket
+                </mat-icon>
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" class="logo-text h1">
+                    Products
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <!--    <div class="search-wrapper mx-32 mx-md-0">
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>search</mat-icon>
+                        <input placeholder="Search for a product">
+                    </div>
+                </div>-->
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button [routerLink]="['../create']"
+                    class="add-product-button fuse-white mt-24 mt-md-0"
+                    mat-raised-button>
+                <span>ADD NEW PRODUCT</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <kendo-grid [data]="gridData" [height]="410">
+                <kendo-grid-column field="name" title="Name">
+                </kendo-grid-column>
+                <kendo-grid-column field="overview" title="Overview">
+                </kendo-grid-column>
+                <kendo-grid-column field="comment" title="Comment">
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

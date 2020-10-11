@@ -45,6 +45,8 @@ export class CharacteristicsGridComponent implements OnInit {
     }
 
     onRemove(index): void {
+        // rows must all be closed while removing products
+        //this.closeAllRows();
 
         // remove product and product form group
         this.characteristics.splice(index, 1);
@@ -58,7 +60,7 @@ export class CharacteristicsGridComponent implements OnInit {
     public onGridChange(): void {
         this.closeAllRows();
         this.characteristics = this.formArray.value;
-        let tmp = {name: this.input.nativeElement.value, values: this.characteristics};
+        const tmp = {name: this.input.nativeElement.value, values: this.formArray.value.map(vl => vl.value)};
         this.characteristicsChange.emit(tmp);
     }
 

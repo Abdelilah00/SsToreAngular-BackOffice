@@ -44,6 +44,20 @@ export const navigation: FuseNavigation[] = [
                         url: '/apps/products/product',
                         exactMatch: true
                     },
+                    {
+                        id: 'category',
+                        title: 'Category',
+                        type: 'item',
+                        url: '/apps/products/category',
+                        exactMatch: true
+                    },
+                    {
+                        id: 'shipping-method',
+                        title: 'Shipping Method',
+                        type: 'item',
+                        url: '/apps/products/shipping-method',
+                        exactMatch: true
+                    },
                 ]
             },
         ]

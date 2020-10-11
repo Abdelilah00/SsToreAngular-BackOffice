@@ -17,6 +17,7 @@ import {Tag} from '../../../../shared/models/tag.model';
 import {WareHouse} from '../../../../shared/models/ware-house.model';
 import {Product} from '../../../../shared/models/product.model';
 
+
 @Component({
     selector: 'e-commerce-product',
     templateUrl: './product.component.html',
@@ -38,13 +39,9 @@ export class ProductCreateComponent implements OnInit {
     @ViewChild('autoTag', {static: false}) matAutocompleteTag: MatAutocomplete;
     @ViewChild('autoWareHouse', {static: false}) matAutocompleteWareHouse: MatAutocomplete;
 
-
     saving = false;
-    formGroup = this.createProductFormGroup();
-    formData = new FormData();
-
-    // Specifications
-
+    productFormGroup = this.createProductFormGroup();
+    productFormData = new FormData();
 
     filtredCategories: Observable<Category[]>;
     selectedCategories = new Array<Category>();
@@ -57,8 +54,6 @@ export class ProductCreateComponent implements OnInit {
     filtredWareHouses: Observable<WareHouse[]>;
     selectedWareHouses = new Array<WareHouse>();
     allWareHouses = new Array<WareHouse>();
-
-    enableAddTableButton = true;
 
     /**
      * Constructor
@@ -81,9 +76,37 @@ export class ProductCreateComponent implements OnInit {
         private _matSnackBar: MatSnackBar) {
     }
 
-    get formArray(): FormArray {
-        return this.formGroup.get('characteristics') as FormArray;
+    get formArrayCharacteristics(): FormArray {
+        return this.productFormGroup.controls.characteristics as FormArray;
     }
+
+
+    addChar(): void {
+        this.formArrayCharacteristics.push(this.createFromGroupCharacteristic());
+    }
+
+    // TODO: add index to child component instead of use name
+    removeChar(name): void {
+        let index = this.formArrayCharacteristics.value.findIndex(item => item.name === name);
+        index = index !== -1 ? index : this.formArrayCharacteristics.value.findIndex(item => item.name === null);
+
+        this.formArrayCharacteristics.removeAt(index);
+        console.log(this.formArrayCharacteristics.value);
+    }
+
+    // TODO: add index to child component instead of use name
+    setNewChars(chars): void {
+        console.log(chars);
+        let index = this.formArrayCharacteristics.value.findIndex(item => item.name === null);
+        index = index !== -1 ? index : this.formArrayCharacteristics.value.findIndex(item => item.name === chars.name);
+
+        if (index !== -1) {
+            this.formArrayCharacteristics.at(index).setValue(chars);
+        }
+
+        console.log(this.formArrayCharacteristics.value);
+    }
+
 
     findWithAttr(array, attr, value): number {
         for (let i = 0; i < array.length; i += 1) {
@@ -99,6 +122,7 @@ export class ProductCreateComponent implements OnInit {
         const index = this.findWithAttr(this.selectedCategories, 'name', cat);
         if (index >= 0) {
             this.selectedCategories.splice(index, 1);
+            this.updateFormGroup();
         }
     }
 
@@ -108,7 +132,8 @@ export class ProductCreateComponent implements OnInit {
         category.name = event.option.viewValue;
         this.selectedCategories.push(category);
         this.categoryInput.nativeElement.value = '';
-        this.formGroup.controls['categoriesId'].setValue(null);
+        this.updateFormGroup();
+
     }
 
     /*** tags multiSelect with filter*/
@@ -117,6 +142,7 @@ export class ProductCreateComponent implements OnInit {
 
         if (index >= 0) {
             this.selectedTags.splice(index, 1);
+            this.updateFormGroup();
         }
     }
 
@@ -126,7 +152,7 @@ export class ProductCreateComponent implements OnInit {
         tag.tagName = event.option.viewValue;
         this.selectedTags.push(tag);
         this.tagInput.nativeElement.value = '';
-        this.formGroup.controls['tagsId'].setValue(null);
+        this.updateFormGroup();
     }
 
     /*** WareHouse multiSelect with filter*/
@@ -134,8 +160,13 @@ export class ProductCreateComponent implements OnInit {
         const index = this.findWithAttr(this.selectedWareHouses, 'country', wHouse);
         if (index >= 0) {
             this.selectedWareHouses.splice(index, 1);
+            this.updateFormGroup();
         }
     }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Lifecycle hooks
+    // -----------------------------------------------------------------------------------------------------
 
     selectedWareHouse(event: MatAutocompleteSelectedEvent): void {
         const wHouse = new WareHouse();
@@ -143,7 +174,7 @@ export class ProductCreateComponent implements OnInit {
         wHouse.country = event.option.viewValue;
         this.selectedWareHouses.push(wHouse);
         this.tagInput.nativeElement.value = '';
-        this.formGroup.controls['wareHousesId'].setValue(null);
+        this.updateFormGroup();
     }
 
     /**
@@ -155,28 +186,28 @@ export class ProductCreateComponent implements OnInit {
 
         this._categoryService.getAll().subscribe(data => {
             this.allCategories = data;
-            this.filtredCategories = this.formGroup.controls['categoriesId'].valueChanges.pipe(
+            this.filtredCategories = this.productFormGroup.controls['categoriesId'].valueChanges.pipe(
                 startWith(null),
                 map((cat: string | null) => cat ? this._filterCategory(cat) : this.allCategories.slice()));
         });
 
         this._tagService.getAll().subscribe(data => {
             this.allTags = data;
-            this.filtredTags = this.formGroup.controls['tagsId'].valueChanges.pipe(
+            this.filtredTags = this.productFormGroup.controls['tagsId'].valueChanges.pipe(
                 startWith(null),
                 map((tag: string | null) => tag ? this._filterTag(tag) : this.allTags.slice()));
         });
 
         this._wareHouseService.getAll().subscribe(data => {
             this.allWareHouses = data;
-            this.filtredWareHouses = this.formGroup.controls['wareHousesId'].valueChanges.pipe(
+            this.filtredWareHouses = this.productFormGroup.controls['wareHousesId'].valueChanges.pipe(
                 startWith(null),
                 map((wareHouse: string | null) => wareHouse ? this._filterWareHouse(wareHouse) : this.allWareHouses.slice()));
         });
     }
 
     // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
+    // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
     /**
@@ -188,19 +219,19 @@ export class ProductCreateComponent implements OnInit {
         return this._formBuilder.group({
             name: ['test', Validators.required],
             comment: ['test', Validators.required],
-            salePrice: ['10', Validators.nullValidator],
-            initQte: ['1000', Validators.nullValidator],
-            overview: ['test', Validators.nullValidator],
+            salePrice: ['10', Validators.required],
+            initQte: ['1000', Validators.required],
+            overview: ['test', Validators.required],
 
-            tagsId: ['', Validators.nullValidator],
-            categoriesId: ['', Validators.nullValidator],
-            wareHousesId: ['', Validators.nullValidator],
+            tagsId: ['', Validators.required],
+            categoriesId: ['', Validators.required],
+            wareHousesId: ['', Validators.required],
 
-            images: [null, Validators.nullValidator],
+            //images: [null, Validators.required],
 
-            specifications: ['', Validators.nullValidator],
-            shippedBy: ['', Validators.nullValidator],
-            characteristics: this._formBuilder.array([this.createFromGroupCharacteristics()]),
+            specifications: ['', Validators.required],
+            shippedBy: ['', Validators.required],
+            characteristics: this._formBuilder.array([]),
         });
     }
 
@@ -212,36 +243,29 @@ export class ProductCreateComponent implements OnInit {
         if (event.target.files.length > 0) {
             // TODO: add multi select  and images previewers
             const file = event.target.files[0] as File;
-            this.formData.append('images', file, file.name);
-            this.formGroup.controls['images'].setValue(null);
+            this.productFormData.append('images', file, file.name);
+            //this.productFormGroup.controls['images'].setValue(null);
         }
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
     saveProduct(): void {
         // Dont touch this
-        this.formGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
-        this.formGroup.controls['tagsId'].setValue(this.selectedTags.map(data => data.id));
-        this.formGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
 
         // TODO: Add this fields to HTML using a table Details
-        this.formGroup.controls['shippedBy'].setValue([1]);
+        // this.productFormGroup.controls['shippedBy'].setValue([1]);
         // tronsform formArray to Simple Array
-        const tmp = this.formArray.value.map(val => {
+        /*const tmp = this.formArrayCharacteristics.value.map(val => {
             return {name: val.name, values: val.values.map(v => v.value)};
         });
-        this.formGroup.controls['characteristics'].setValue(tmp);
+        this.productFormGroup.controls['characteristics'].setValue(tmp);*/
 
-        this.formData.delete('product');
-        this.formData.append('product', JSON.stringify(this.formGroup.value as Product));
+        this.productFormData.delete('product');
+        this.productFormData.append('product', JSON.stringify(this.productFormGroup.value as Product));
 
         this.saving = true;
 
         this._service
-            .createWithImages(this.formData)
+            .createWithImages(this.productFormData)
             .pipe(
                 finalize(() => {
                     this.saving = false;
@@ -265,49 +289,44 @@ export class ProductCreateComponent implements OnInit {
 
     // kendo
     setSpecifications(specs): void {
-        this.formGroup.controls['specifications'].setValue(specs);
-    }
-
-    setCharacteristics(chars): void {
-        const tmp = this.formArray.controls.find(ctrl => ctrl.value.name === '' || chars.name);
-
-        if (tmp !== undefined) {
-            tmp.setValue(chars);
-        }
-
-        console.log(this.formArray.value);
-
-        // enable button if name && value not null
-        this.enableAddTableButton = this.formArray.controls.some(ctrl => ctrl.value.name !== ''
-            && ctrl.value.values !== undefined
-            && ctrl.value.values.length > 0
-            && ctrl.value.values.some(vl => vl.value !== ''));
+        this.productFormGroup.controls['specifications'].setValue(specs);
     }
 
     setShippedBy(ship): void {
-        this.formGroup.controls['shippedBy'].setValue(ship);
+        this.productFormGroup.controls['shippedBy'].setValue(ship);
     }
 
-    addCharacteristcTable(): void {
-        this.formArray.push(this.createFromGroupCharacteristics());
-        this.enableAddTableButton = false;
-    }
-
-    removeCharacteristicTable(name: any): void {
-        const index = this.formArray.controls.map(ctrl => ctrl.value.name).indexOf(name);
-        this.formArray.removeAt(index);
-    }
-
-    createFromGroupCharacteristics(): FormGroup {
+    createFromGroupCharacteristic(chars: any = {}): FormGroup {
         return this._formBuilder.group({
-            name: ['', Validators.required],
-            values: ['', Validators.required]
+            name: [chars.name, Validators.required],
+            values: [chars.values, Validators.required]
+        });
+    }
+
+    createFromGroupSpecification(chars: any = {}): FormGroup {
+        return this._formBuilder.group({
+            name: [chars.name, Validators.required],
+            value: [chars.value, Validators.required],
+        });
+    }
+
+    createFromGroupShippedBy(chars: any = {}): FormGroup {
+        return this._formBuilder.group({
+            amount: [chars.name, Validators.required],
+            shippingCountryId: [chars.values, Validators.required],
+            shippingMethodId: [chars.values, Validators.required],
         });
     }
 
     // Kendo
     goBack(): void {
         this._location.back();
+    }
+
+    private updateFormGroup(): void {
+        this.productFormGroup.controls['categoriesId'].setValue(this.selectedCategories.map(data => data.id));
+        this.productFormGroup.controls['tagsId'].setValue(this.selectedTags.map(data => data.id));
+        this.productFormGroup.controls['wareHousesId'].setValue(this.selectedWareHouses.map(data => data.id));
     }
 
     private _filterCategory(value: string): Category[] {

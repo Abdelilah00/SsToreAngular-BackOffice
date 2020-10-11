@@ -15,15 +15,14 @@ export class ProductListComponent implements OnInit {
     displayedColumns = ['id', 'image', 'name', 'category', 'price', 'stockQte', 'initQte', 'active'];
 
     constructor(
-        private _productService: ProductService
+        private productService: ProductService
     ) {
-        _productService.getAll().subscribe(data => this.gridData = data);
     }
 
     /**
      * On init
      */
     ngOnInit(): void {
-
+        this.productService.getAll().subscribe(data => this.gridData = data);
     }
 }

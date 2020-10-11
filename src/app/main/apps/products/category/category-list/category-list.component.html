@@ -1,3 +1,84 @@
-<p>
-    category-list works!
-</p>
+<div class="page-layout carded fullwidth inner-scroll" id="products">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="column" fxLayout.gt-sm="row"
+             fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0"
+                 fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon [@animate]="{value:'*',params:{delay:'500ms',scale:'0.2'}}" class="logo-icon s-32 mr-16">
+                    shopping_basket
+                </mat-icon>
+                <span [@animate]="{value:'*',params:{delay:'1000ms',x:'-25px'}}" class="logo-text h1">
+                    Category
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <!--<div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input placeholder="Search for a product">
+                </div>
+            </div>-->
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button [routerLink]="['../create']"
+                    class="add-product-button fuse-white mt-24 mt-md-0"
+                    mat-raised-button>
+                <span>ADD NEW PRODUCT</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <kendo-grid
+                [data]="view"
+                [height]="533"
+                [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                [pageable]="true" [sortable]="true"
+                (dataStateChange)="onStateChange($event)"
+                (edit)="editHandler($event)" (remove)="removeHandler($event)"
+                (add)="addHandler($event)">
+
+                <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridAddCommand>Add new</button>
+                </ng-template>
+
+                <kendo-grid-column field="name" title="Category Name"></kendo-grid-column>
+
+                <kendo-grid-command-column title="Options" width="220">
+                    <ng-template kendoGridCellTemplate>
+                        <button kendoGridEditCommand [primary]="true">Edit</button>
+                        <button kendoGridRemoveCommand>Delete</button>
+                    </ng-template>
+                </kendo-grid-command-column>
+
+                <div *kendoGridDetailTemplate="let dataItem">
+                    <app-category-details [category]="dataItem"></app-category-details>
+                </div>
+            </kendo-grid>
+
+            <app-category-edit [model]="editDataItem" [isNew]="isNew"
+                               (save)="saveHandler($event)"
+                               (cancel)="cancelHandler()">
+            </app-category-edit>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

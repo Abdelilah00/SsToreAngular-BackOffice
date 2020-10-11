@@ -1,0 +1,28 @@
+<kendo-grid
+    [data]="view"
+    [navigable]="true"
+    (edit)="editHandler($event)"
+    (remove)="removeHandler($event)"
+    (add)="addHandler($event)"
+    kendoGridFocusable>
+
+    <ng-template kendoGridToolbarTemplate>
+        <button kendoGridAddCommand>Add new</button>
+    </ng-template>
+
+
+    <kendo-grid-column field="name" title="Category Name">
+    </kendo-grid-column>
+
+    <kendo-grid-command-column title="Options" width="220">
+        <ng-template kendoGridCellTemplate>
+            <button kendoGridEditCommand [primary]="true">Edit</button>
+            <button kendoGridRemoveCommand>Delete</button>
+        </ng-template>
+    </kendo-grid-command-column>
+</kendo-grid>
+
+<app-category-edit [model]="editDataItem" [isNew]="isNew"
+                   (save)="saveHandler($event)"
+                   (cancel)="cancelHandler()">
+</app-category-edit>

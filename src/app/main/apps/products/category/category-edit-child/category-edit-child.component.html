@@ -1,0 +1,23 @@
+<kendo-dialog *ngIf="active" [width]="300" [height]="450" (close)="closeForm()">
+    <kendo-dialog-titlebar>
+        {{ isNew ? 'Add new product' : 'Edit product' }}
+    </kendo-dialog-titlebar>
+
+    <form novalidate [formGroup]="editForm">
+        <div class="form-group">
+            <mat-form-field appearance="outline" class="w-100-p" floatLabel="always">
+                <mat-label>Category Name</mat-label>
+                <input formControlName="name" matInput
+                       name="name"
+                       placeholder="Category Name">
+            </mat-form-field>
+
+        </div>
+
+    </form>
+
+    <kendo-dialog-actions>
+        <button class="k-button" (click)="onCancel($event)">Cancel</button>
+        <button class="k-button k-primary" [disabled]="!editForm.valid" (click)="onSave($event)">Save</button>
+    </kendo-dialog-actions>
+</kendo-dialog>

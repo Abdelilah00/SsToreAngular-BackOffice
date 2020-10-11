@@ -52,12 +52,13 @@ export class SpecificationsGridComponent implements OnInit {
         this.formArray.removeAt(index);
 
         // reset all rows back to edit mode
-        this.editAllRows();
+        //this.editAllRows();
         this.onGridChange();
 
     }
 
     public onGridChange(): void {
+        //this.closeAllRows();
         this.specifications = this.formArray.value;
         this.specificationsChange.emit(this.specifications);
     }

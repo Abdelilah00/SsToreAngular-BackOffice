@@ -1,44 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoryService} from "../../../../shared/services/category/category.service";
-import {fuseAnimations} from "../../../../../../@fuse/animations";
-import {State} from "@progress/kendo-data-query";
+import {Component, Input, OnInit} from '@angular/core';
 import {Category} from "../../../../shared/models/category.model";
+import {CategoryService} from "../../../../shared/services/category/category.service";
 import {finalize} from "rxjs/operators";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-    selector: 'app-category-list',
-    templateUrl: './category-list.component.html',
-    styleUrls: ['./category-list.component.scss'],
-    animations: fuseAnimations,
-
+    selector: 'app-category-details',
+    templateUrl: './category-details.component.html',
+    styleUrls: ['./category-details.component.scss']
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryDetailsComponent implements OnInit {
     view: Category[];
-    public gridState: State = {
-        sort: [],
-        skip: 0,
-        take: 10
-    };
+    @Input() category: Category;
     public editDataItem: Category;
     public isNew: boolean;
 
-    constructor(
-        private categoryService: CategoryService,
-        private _matSnackBar: MatSnackBar) {
+
+    constructor(private categoryService: CategoryService,
+                private _matSnackBar: MatSnackBar) {
     }
 
-
-    public ngOnInit(): void {
-        this.loadGridData();
-    }
-
-    public onStateChange(state: State): void {
-        this.gridState = state;
+    ngOnInit(): void {
+        this.categoryService.getChildren(this.category.id).subscribe(data => this.view = data);
     }
 
     public addHandler(): void {
-        this.editDataItem = new Category();
+        const tmp = new Category();
+        tmp.parentId = this.category.id;
+        this.editDataItem = tmp;
         this.isNew = true;
     }
 
@@ -47,8 +36,26 @@ export class CategoryListComponent implements OnInit {
         this.isNew = false;
     }
 
-    public cancelHandler(): void {
-        this.editDataItem = undefined;
+    public removeHandler({dataItem}): void {
+        this.categoryService.delete(dataItem.id)
+            .pipe(
+                finalize(() => {
+                    this.loadGridData();
+                })
+            )
+            .subscribe(() => {
+                // Show the success message
+                this._matSnackBar.open('Category Deleted', 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            }, (error) => {
+                this._matSnackBar.open('Category Not Deleted', 'Try', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            });
+
     }
 
     public saveHandler(product: Category): void {
@@ -95,29 +102,11 @@ export class CategoryListComponent implements OnInit {
         this.editDataItem = undefined;
     }
 
-    public removeHandler({dataItem}): void {
-        this.categoryService.delete(dataItem.id)
-            .pipe(
-                finalize(() => {
-                    this.loadGridData();
-                })
-            )
-            .subscribe(() => {
-                // Show the success message
-                this._matSnackBar.open('Category Deleted', 'OK', {
-                    verticalPosition: 'top',
-                    duration: 2000
-                });
-            }, (error) => {
-                this._matSnackBar.open('Category Not Deleted', 'Try', {
-                    verticalPosition: 'top',
-                    duration: 2000
-                });
-            });
-
+    public cancelHandler(): void {
+        this.editDataItem = undefined;
     }
 
     private loadGridData(): void {
-        this.categoryService.getParents().subscribe(data => this.view = data);
+        this.categoryService.getChildren(this.category.id).subscribe(data => this.view = data);
     }
 }

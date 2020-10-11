@@ -35,6 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -45,9 +46,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
         FuseDirectivesModule,
         FusePipesModule,
-
-
     ],
+
     exports: [
         CommonModule,
         FormsModule,

@@ -51,12 +51,13 @@ export class ShippedByGridComponent implements OnInit {
         this.formArray.removeAt(index);
 
         // reset all rows back to edit mode
-        this.editAllRows();
+        //this.editAllRows();
         this.onGridChange();
 
     }
 
     public onGridChange(): void {
+        //this.closeAllRows();
         this.shippedBy = this.formArray.value;
         this.shippedByChange.emit(this.shippedBy);
     }
